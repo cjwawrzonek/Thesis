@@ -686,7 +686,7 @@ def combGen(n, locations, phase_times, phase_var, test=False, shuffle=True, file
 		fname = ""
 		if test:
 			fname += "TEST"
-		fname += "selection_" + str(n) + "x" + str(n) + "_" + str(locations) + \
+		fname += "combined_" + str(n) + "x" + str(n) + "_" + str(locations) + \
 				 "_targets_"
 		if shuffle:
 			fname+= "shuffle"

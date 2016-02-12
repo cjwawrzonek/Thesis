@@ -882,14 +882,6 @@ class HessianBackprop(object):
             myfile.write(str(new_err))
             myfile.write("\n#################################\n\n")
 
-        comp = open("comp", "wb+")
-
-        for x in range(len(delta)):
-            comp.write(str(self.learning_mask[x]) + " # ")
-            for y in range(len(ds)):
-                comp.write(str(ds[y][x]) + " -- ")
-            print >> comp
-
         fweights = open("weights_matrix", "wb+")
 
         print self.layers

@@ -1,0 +1,5 @@
+type: 'input',
+task:'attention', ------ (could be attention, seleciton, standard, or combined)
+inputs:{'cue1':loc#,'cue2':loc#,'choice':'1/2'},
+dimension:{'selection':3,'cue1':3,'cue2':3,'delay':5,'output':5}
+
