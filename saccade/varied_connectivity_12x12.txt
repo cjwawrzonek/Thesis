@@ -1,0 +1,54 @@
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8147.0
+Total Possible
+20736
+err = 
+2.23553849667e-06
+#################################
+
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8145.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8083.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8188.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8196.0
+Total Possible
+20736

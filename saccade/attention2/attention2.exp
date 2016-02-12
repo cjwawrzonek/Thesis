@@ -1,0 +1,15 @@
+## Attention Experiment, 8 locations
+name	attention2
+description	Attention experiment with 8 locations. Training set is comprehensive set of all inputs. No variable delay.
+directory	attention2
+type	attention
+input_side	11
+total_length	18
+phase_times	{"delay":5,"output":5,"cue":3,"locs":5}
+num_locs	8
+init_weights	init_weights
+train_shuffle	true
+loc_connect	false
+phase_var	{"delay":false,"cue":false,"locs":false}
+variance	2
+
