@@ -8,8 +8,9 @@ import sys
 import inputSpaces as ips
 import random
 import utility as util # my standard library
+import pprint
 
-def attenGen(n, locations, phase_times, phase_var, test=False, shuffle=True, filepath=None):
+def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -17,8 +18,10 @@ def attenGen(n, locations, phase_times, phase_var, test=False, shuffle=True, fil
 	delay_time = phase_times['delay']
 	output_time = phase_times['output']
 
+	# reps determines how thorough the training is
+	#*
+	reps = round((locations - 1) * (float(train_pct) / 100))
 
-	reps = locations - 1
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
 	targets = []
@@ -59,8 +62,6 @@ def attenGen(n, locations, phase_times, phase_var, test=False, shuffle=True, fil
 				 "_targets_"
 		if shuffle:
 			fname+= "shuffle"
-		if rand_delay or rand_input:
-			fname += "_randDelay"
 		fname += ".txt"
 	else:
 		fname = filepath
@@ -88,6 +89,11 @@ def attenGen(n, locations, phase_times, phase_var, test=False, shuffle=True, fil
 	# [ [title], [outputN] ]
 	#######################################################################
 	outSet = []
+
+	#*
+	unused_pairs = [x for x in range(locations)]
+	for x in range(locations):
+		unused_pairs[x] = [y for y in range(2)]
 
 	##################################################################
 	# This big loops generates all of the inputs and targets. Each iteration
@@ -320,12 +326,19 @@ def attenGen(n, locations, phase_times, phase_var, test=False, shuffle=True, fil
 
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
+			#*
+			unused_pairs[i][selection].append[unusedLocations]
 
 	# END FIRST BIG LOOP
 
+	#*
+	funused = open(fname + "_UnusedLocations", "wb+")
+	print >> funused, unused_pairs
+	close(funused)
+
 	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
 
-def selGen(n, locations, phase_times, phase_var, test=False, shuffle=True, filepath=None):
+def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -333,8 +346,10 @@ def selGen(n, locations, phase_times, phase_var, test=False, shuffle=True, filep
 	delay_time = phase_times['delay']
 	output_time = phase_times['output']
 
+	# reps determines how thorough the training is
+	#*
+	reps = round((locations - 1) * (float(train_pct) / 100))
 
-	reps = locations - 1
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
 	targets = []
@@ -404,6 +419,11 @@ def selGen(n, locations, phase_times, phase_var, test=False, shuffle=True, filep
 	# [ [title], [outputN] ]
 	#######################################################################
 	outSet = []
+
+	#*
+	unused_pairs = [x for x in range(locations)]
+	for x in range(locations):
+		unused_pairs[x] = [y for y in range(2)]
 
 	##################################################################
 	# This big loops generates all of the inputs and targets. Each iteration
@@ -635,12 +655,19 @@ def selGen(n, locations, phase_times, phase_var, test=False, shuffle=True, filep
 
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
+			#*
+			unused_pairs[i][selection].append[unusedLocations]
 
 	# END FIRST BIG LOOP
 
+	#*
+	funused = open(fname + "_UnusedLocations", "wb+")
+	print >> funused, unused_pairs
+	close(funused)
+
 	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
 
-def combGen(n, locations, phase_times, phase_var, test=False, shuffle=True, filepath=None):
+def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -648,8 +675,10 @@ def combGen(n, locations, phase_times, phase_var, test=False, shuffle=True, file
 	delay_time = phase_times['delay']
 	output_time = phase_times['output']
 
+	# reps determines how thorough the training is
+	#*
+	reps = round((locations - 1) * (float(train_pct) / 100))
 
-	reps = locations - 1
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
 	targets = []
@@ -699,6 +728,11 @@ def combGen(n, locations, phase_times, phase_var, test=False, shuffle=True, file
 	inputSet = []
 
 	outSet = []
+
+	#*
+	unused_pairs = [x for x in range(locations)]
+	for x in range(locations):
+		unused_pairs[x] = [y for y in range(2)]
 
 	##################################################################
 	# First big loop to make the selection inputs
@@ -927,8 +961,20 @@ def combGen(n, locations, phase_times, phase_var, test=False, shuffle=True, file
 
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
+			#*
+			unused_pairs[i][selection].append[unusedLocations]
 
 	# END FIRST BIG LOOP
+
+	#*
+	funused = open(fname + "_UnusedLocations_Selection", "wb+")
+	print >> funused, unused_pairs
+	close(funused)
+
+	#*
+	unused_pairs = [x for x in range(locations)]
+	for x in range(locations):
+		unused_pairs[x] = [y for y in range(2)]
 
 	#################################################
 	# Second big loop to generate attention inputs
@@ -1159,6 +1205,15 @@ def combGen(n, locations, phase_times, phase_var, test=False, shuffle=True, file
 
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
+			#*
+			unused_pairs[i][selection].append[unusedLocations]
+
+	# END FIRST BIG LOOP
+
+	#*
+	funused = open(fname + "_UnusedLocations_Attention", "wb+")
+	print >> funused, unused_pairs
+	close(funused)
 
 	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
 

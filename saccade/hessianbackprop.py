@@ -172,7 +172,7 @@ class HessianBackprop(object):
 
         # exit()
 
-        f = open("file", 'wb+')
+        # f = open("file", 'wb+')
         weights = open("hidden_weights.txt", 'rb+')
         mask = open("hidden_mask.txt", 'rb+')
 
@@ -209,8 +209,8 @@ class HessianBackprop(object):
         l_mask = np.asarray(l_mask)
 
         for l in range(self.n_layers - 1):
-            if l == 1:
-            # if False:
+            # if l == 1:
+            if False:
                 W[l] = W_hidden
                 # for x in range(1, len(W[l][0])):
                 #     W[l][x][x] = 100

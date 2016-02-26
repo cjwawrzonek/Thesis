@@ -49,7 +49,7 @@ class experiment:
 			self.filepath = filepath
 
 		if self.filepath == None:
-			raise Exception("No filepath initialized for this experiment: {}".format(self.exp['name']))
+			raise Exception("No filepath initialized for this experiment"))
 
 		expfile = open(filepath, 'rb')
 
@@ -81,6 +81,12 @@ class experiment:
 					self.exp[line[0]] = line[1]
 			i += 1
 
+		try:
+			if self.exp['train_pct'] > 100 or self.exp['train_pct'] <= 0:
+				raise Exception("train_pct must be > 0 and <= 100")
+		except:
+			self.exp['train_pct'] = 100
+
 		# get the dictionary of phase times
 		self.exp['phase_times'] = json.loads(self.exp['phase_times'])
 
@@ -93,6 +99,12 @@ class experiment:
 
 		for phase in self.exp['phase_var']:
 			self.exp['phase_var'][phase] = util.isTrue(self.exp['phase_var'][phase])
+
+		if not 'name' in self.exp:
+			if not 'directory' in self.exp:
+				self.exp['name'] = "default_name"
+			else:
+				self.exp['name'] = self.exp['directory']
 
 		if not 'directory' in self.exp:
 			self.exp['directory'] = None
@@ -119,13 +131,13 @@ class experiment:
 			pass # ig.simpleGen()
 		elif self.exp['type'] == "attention":
 			ig.attenGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], filepath=trainFilepath)
+						self.exp['phase_var'], self.exp['train_pct'], filepath=trainFilepath)
 		elif self.exp['type'] == "selection":
 			ig.selGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], filepath=trainFilepath)
+						self.exp['phase_var'], self.exp['train_pct'], filepath=trainFilepath)
 		elif self.exp['type'] == "combined":
 			ig.combGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], filepath=trainFilepath)
+						self.exp['phase_var'], self.exp['train_pct'], filepath=trainFilepath)
 		else:
 			raise Exception("Experiment type not in list: {}".format(self.exp['type']))
 
