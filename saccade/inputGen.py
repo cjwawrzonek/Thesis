@@ -8,7 +8,7 @@ import sys
 import inputSpaces as ips
 import random
 import utility as util # my standard library
-import pprint
+import pprint as pp
 
 def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
@@ -20,7 +20,7 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffl
 
 	# reps determines how thorough the training is
 	#*
-	reps = round((locations - 1) * (float(train_pct) / 100))
+	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
@@ -93,7 +93,7 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffl
 	#*
 	unused_pairs = [x for x in range(locations)]
 	for x in range(locations):
-		unused_pairs[x] = [y for y in range(2)]
+		unused_pairs[x] = [[],[]]
 
 	##################################################################
 	# This big loops generates all of the inputs and targets. Each iteration
@@ -327,14 +327,14 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffl
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
 			#*
-			unused_pairs[i][selection].append[unusedLocations]
+			unused_pairs[i][selection].append(unusedLocations)
 
 	# END FIRST BIG LOOP
 
 	#*
 	funused = open(fname + "_UnusedLocations", "wb+")
-	print >> funused, unused_pairs
-	close(funused)
+	pp.pprint(unused_pairs, funused)
+	funused.close()
 
 	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
 
@@ -348,7 +348,7 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 
 	# reps determines how thorough the training is
 	#*
-	reps = round((locations - 1) * (float(train_pct) / 100))
+	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
@@ -423,7 +423,7 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 	#*
 	unused_pairs = [x for x in range(locations)]
 	for x in range(locations):
-		unused_pairs[x] = [y for y in range(2)]
+		unused_pairs[x] = [[],[]]
 
 	##################################################################
 	# This big loops generates all of the inputs and targets. Each iteration
@@ -656,14 +656,14 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
 			#*
-			unused_pairs[i][selection].append[unusedLocations]
+			unused_pairs[i][selection].append(unusedLocations)
 
 	# END FIRST BIG LOOP
 
 	#*
 	funused = open(fname + "_UnusedLocations", "wb+")
-	print >> funused, unused_pairs
-	close(funused)
+	pp.pprint(unused_pairs, funused)
+	funused.close()
 
 	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
 
@@ -677,7 +677,7 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 
 	# reps determines how thorough the training is
 	#*
-	reps = round((locations - 1) * (float(train_pct) / 100))
+	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
@@ -732,7 +732,7 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 	#*
 	unused_pairs = [x for x in range(locations)]
 	for x in range(locations):
-		unused_pairs[x] = [y for y in range(2)]
+		unused_pairs[x] = [[],[]]
 
 	##################################################################
 	# First big loop to make the selection inputs
@@ -962,19 +962,19 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
 			#*
-			unused_pairs[i][selection].append[unusedLocations]
+			unused_pairs[i][selection].append(unusedLocations)
 
 	# END FIRST BIG LOOP
 
 	#*
 	funused = open(fname + "_UnusedLocations_Selection", "wb+")
-	print >> funused, unused_pairs
-	close(funused)
+	pp.pprint(unused_pairs, funused)
+	funused.close()
 
 	#*
 	unused_pairs = [x for x in range(locations)]
 	for x in range(locations):
-		unused_pairs[x] = [y for y in range(2)]
+		unused_pairs[x] = [[],[]]
 
 	#################################################
 	# Second big loop to generate attention inputs
@@ -1206,14 +1206,14 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 				trialSet['outputs'] = output_i
 				outSet.append(trialSet)
 			#*
-			unused_pairs[i][selection].append[unusedLocations]
+			unused_pairs[i][selection].append(unusedLocations)
 
 	# END FIRST BIG LOOP
 
 	#*
 	funused = open(fname + "_UnusedLocations_Attention", "wb+")
-	print >> funused, unused_pairs
-	close(funused)
+	pp.pprint(unused_pairs, funused)
+	funused.close()
 
 	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
 

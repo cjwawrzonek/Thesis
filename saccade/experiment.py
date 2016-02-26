@@ -49,7 +49,7 @@ class experiment:
 			self.filepath = filepath
 
 		if self.filepath == None:
-			raise Exception("No filepath initialized for this experiment"))
+			raise Exception("No filepath initialized for this experiment")
 
 		expfile = open(filepath, 'rb')
 
@@ -73,11 +73,9 @@ class experiment:
 		while i < len(lines):
 			if not lines[i].startswith("#") and lines[i] != '\n' and lines[i] != '':
 				line = lines[i].split("\t")
-				print line
 				try:
 					self.exp[line[0]] = int(line[1])
 				except:
-					print line
 					self.exp[line[0]] = line[1]
 			i += 1
 
@@ -156,23 +154,6 @@ class experiment:
 		targets = ret['targets']
 		inputNames = ret["inputNames"]
 		targetNames = ret["targetNames"]
-
-		default = True
-		# These are your initial hidden_weights, created through the matlab script weights.m
-		if default == True:
-			weights = open("hidden_weights_default.txt", 'rb+')
-			shutil.copyfile("hidden_weights_default.txt", "hidden_weights.txt")
-			shutil.copyfile("hidden_mask_default.txt", "hidden_mask.txt")
-		else:
-			weights = open("hidden_weight.txt", 'rb+')
-		line = weights.readline();
-		num_lines = 0
-
-		while line != "":
-			num_lines += 1
-			line = weights.readline()
-
-		weights.close()
 
 		if not loadW:
 			isSuccess = train_saccade(self.num_trains, inputNames, targetNames,

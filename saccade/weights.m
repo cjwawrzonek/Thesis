@@ -36,14 +36,14 @@ w = [zeros(1,N^2); ((r(2)-r(1)).*rand(N^2)+r(1)).*layer];
 figure; imagesc(mask);
 figure; imagesc(w);
 
-f = fopen('hidden_mask.txt','w');
+f = fopen('hidden_mask_temp.txt','w');
 for i=1:size(mask,1),
     s = mat2str(mask(i,:));
     fprintf(f,sprintf('%s\n',s(2:end-1)));
 end;
 fclose(f);
 
-f = fopen('hidden_weights.txt','w');
+f = fopen('hidden_weights_temp.txt','w');
 for i=1:size(w,1),
     s = mat2str(w(i,:),3);
     fprintf(f,sprintf('%s\n',s(2:end-1)));

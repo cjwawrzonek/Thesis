@@ -209,9 +209,14 @@ class HessianBackprop(object):
         l_mask = np.asarray(l_mask)
 
         for l in range(self.n_layers - 1):
-            # if l == 1:
-            if False:
-                W[l] = W_hidden
+            if l == 1:
+            # if False:
+                # W[l] = W_hidden
+
+                ## NOTE: I don't know if this will work. Might have to go back to using preinited weights
+                for row in range(len(W[l])):
+                    W[l][row] = W_hidden[row][0:len(W[l][row])]
+
                 # for x in range(1, len(W[l][0])):
                 #     W[l][x][x] = 100
                 # W[l][:, :] = 0
