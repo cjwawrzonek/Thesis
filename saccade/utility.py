@@ -6,7 +6,7 @@ import copy
 import pickle
 import random
 import math
-import statistics as stat
+# import statistics as stat
 
 import numpy as np
 from pprint import pprint
@@ -250,12 +250,12 @@ def isTrue(string):
     else:
         return False
 
-def zscore(dataSet):
-    sd = stat.pstdev(dataSet)
-    dataMean = np.mean(dataSet)
-    zs = []
+# def zscore(dataSet):
+#     sd = stat.pstdev(dataSet)
+#     dataMean = np.mean(dataSet)
+#     zs = []
 
-    for x in dataSet:
-        zs.append((x - dataMean)/sd)
+#     for x in dataSet:
+#         zs.append((x - dataMean)/sd)
 
-    return zs
+#     return zs
