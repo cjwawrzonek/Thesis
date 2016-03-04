@@ -16,7 +16,8 @@ def makeExps(expType):
 
 				f.write('''## {} Experiment
 description	{} experiment
-directory	{}{}
+name		{}{}
+directory	experiments/{}{}
 type		{}
 total_length	18
 phase_times	{{"delay":5,"output":5,"cue":3,"locs":5}}
@@ -29,22 +30,25 @@ train_shuffle	true
 loc_connect	false
 phase_var	{{"delay":false,"cue":false,"locs":false}}
 variance	2
-train_pct	{}'''.format(expType, expType, expType, exp, expType, locs, layer, pct))
+train_pct	{}'''.format(expType, expType, expType, exp, expType, exp, expType, locs, layer, pct))
 				f.close()
 				exp += 1
 
 
 def main():
 	if len(sys.argv) < 2:
-		raise Exception("Usage: python makeExps.py [type]\n\nType: attention / selection / combined")
-	if sys.argv[1] == "attention":
+		print "\nMaking experiments for attention, selection, and combined\n"
+		makeExps("attention")
+		makeExps("selection")
+		makeExps("combined")
+	elif sys.argv[1] == "attention":
 		makeExps("attention")
 	elif sys.argv[1] == "selection":
 		makeExps("selection")
 	elif sys.argv[1] == "combined":
 		makeExps("combined")
 	else:
-		raise Exception("Usage: python makeExps.py [type]\n\nType: attention / selection / combined")
+		raise Exception("Usage: python makeExps.py [optional: type]\n\nType: attention / selection / combined")
 
 if __name__ == "__main__":
 	main()

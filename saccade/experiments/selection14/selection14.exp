@@ -1,6 +1,6 @@
 ## selection Experiment
 description	selection experiment
-directory	selection14
+directory	experiments/selection14
 type		selection
 total_length	18
 phase_times	{"delay":5,"output":5,"cue":3,"locs":5}

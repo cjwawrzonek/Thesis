@@ -103,7 +103,7 @@ class experiment:
 			if not 'directory' in self.exp:
 				self.exp['name'] = "default_name"
 			else:
-				self.exp['name'] = self.exp['directory']
+				self.exp['name'] = self.exp['directory'].split('/')[-1]
 
 		if not 'directory' in self.exp:
 			self.exp['directory'] = None
@@ -125,6 +125,8 @@ class experiment:
 	def createTrainSet(self):
 
 		trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
+		print trainFilepath
+		print self.exp['name']
 
 		if self.exp['type'] == "simple":
 			pass # ig.simpleGen()
@@ -253,7 +255,7 @@ def main():
 		expPath = sys.argv[2]
 		if not expPath.endswith('/'):
 			expPath += "/"
-		expPath += "{}.exp" + expName
+		expPath += "{}.exp".format(expName)
 	else:
 		expPath = "{}/{}.exp".format(expName, expName)
 

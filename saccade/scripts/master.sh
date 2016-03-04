@@ -4,6 +4,9 @@
 #          Script for submitting batch experiment runs
 # ------------------------------------------------------------------
 
+# remove outputs from old training runs
+rm -f *.sh.o*
+
 #######################################################
 # attention experiments
 #######################################################

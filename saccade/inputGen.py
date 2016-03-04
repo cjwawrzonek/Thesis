@@ -10,7 +10,7 @@ import random
 import utility as util # my standard library
 import pprint as pp
 
-def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
+def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=False, shuffle=True):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -55,14 +55,7 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffl
 
 	# Create the output file name string
 	if filepath is None:
-		fname = ""
-		if test:
-			fname += "TEST"
-		fname += "attention_" + str(n) + "x" + str(n) + "_" + str(locations) + \
-				 "_targets_"
-		if shuffle:
-			fname+= "shuffle"
-		fname += ".txt"
+		raise Exception("The filepath is 'None'")
 	else:
 		fname = filepath
 
@@ -383,16 +376,7 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 
 	# Create the output file name string
 	if filepath is None:
-		fname = ""
-		if test:
-			fname += "TEST"
-		fname += "selection_" + str(n) + "x" + str(n) + "_" + str(locations) + \
-				 "_targets_"
-		if shuffle:
-			fname+= "shuffle"
-		if rand_delay or rand_input:
-			fname += "_randDelay"
-		fname += ".txt"
+		raise Exception("The filepath is 'None'")
 	else:
 		fname = filepath
 
@@ -712,16 +696,7 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 
 	# Create the output file name string
 	if filepath is None:
-		fname = ""
-		if test:
-			fname += "TEST"
-		fname += "combined_" + str(n) + "x" + str(n) + "_" + str(locations) + \
-				 "_targets_"
-		if shuffle:
-			fname+= "shuffle"
-		if rand_delay or rand_input:
-			fname += "_randDelay"
-		fname += ".txt"
+		raise Exception("The filepath is 'None'")
 	else:
 		fname = filepath
 

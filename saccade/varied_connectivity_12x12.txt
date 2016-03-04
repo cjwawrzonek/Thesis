@@ -208,3 +208,63 @@ New total with additions
 8199.0
 Total Possible
 4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8141.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8105.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8192.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8109.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8151.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8146.0
+Total Possible
+256

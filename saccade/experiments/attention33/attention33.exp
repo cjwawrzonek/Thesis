@@ -1,6 +1,6 @@
 ## attention Experiment
 description	attention experiment
-directory	attention33
+directory	experiments/attention33
 type		attention
 total_length	18
 phase_times	{"delay":5,"output":5,"cue":3,"locs":5}
