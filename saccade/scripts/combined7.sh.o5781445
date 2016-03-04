@@ -1,0 +1,149 @@
+------------------------------
+i am running on node21.cluster
+started at Fri Mar 4 06:27:56 EST 2016
+in /jukebox/buschman/Users/cjw5/Thesis/saccade/scripts
+by cjw5
+via the command:
+pni_submit combined7.sh
+------------------------------
+PyCuda not installed, or no compatible device detected
+Reading in experiment
+
+{u'delay': False, u'locs': False, u'cue': False}
+
+2444.0
+8119.0
+
+
+Experiment Data: 
+{'input_side': 11, 'description': 'combined experiment', 'train_file': 'combined7.train', 'phase_times': {u'delay': 5, u'output': 5, u'cue': 3, u'locs': 5}, 'init_weights': 'init_weights', 'num_locs': 4, 'name': 'combined7', 'input_layer': 125, 'hidden_layer': 64, 'train_pct': 75, 'loc_connect': 'false', 'out_layer': 4, 'directory': 'experiments/combined7/', 'total_length': 18, 'phase_var': {u'delay': False, u'locs': False, u'cue': False}, 'variance': 2, 'type': 'combined', 'train_shuffle': 'true'}
+
+experiments/combined7/combined7.train
+combined7
+Total number of inputSpaces is: 1
+Deleting Space Default Space.
+No more inputSpaces
+Beginning Training
+Epoch Number: 0
+========================================
+batch 0
+grad norm 22.7534
+CG steps 36
+using iteration 36
+err 20.7431640625
+new_err 2.52003598213
+improvement_ratio 1.59270239929
+damping 0.66
+min_improv -0.193046855927
+l_rate 1.0
+l_rate_err 2.52003598213
+improvement -18.2231280804
+test error 2.52003598213
+Epoch Number: 1
+Epoch Number: 2
+Epoch Number: 3
+Epoch Number: 4
+Epoch Number: 5
+Epoch Number: 6
+Epoch Number: 7
+Epoch Number: 8
+Epoch Number: 9
+Epoch Number: 10
+========================================
+batch 10
+grad norm 0.0791359
+CG steps 42
+using iteration 42
+err 1.89797031879
+new_err 1.88337624073
+improvement_ratio 0.968650124178
+damping 0.010351023414
+min_improv -0.00019221637398
+l_rate 1.0
+l_rate_err 1.88337624073
+improvement -0.014594078064
+test error 1.88337624073
+Epoch Number: 11
+Epoch Number: 12
+Epoch Number: 13
+Epoch Number: 14
+Epoch Number: 15
+Epoch Number: 16
+Epoch Number: 17
+Epoch Number: 18
+Epoch Number: 19
+Epoch Number: 20
+========================================
+batch 20
+grad norm 18.0823
+CG steps 99
+using iteration 99
+err 1.34951496124
+new_err 1.26850783825
+improvement_ratio 0.10684513786
+damping 0.006562480182
+min_improv -0.0136546325684
+l_rate 1.0
+l_rate_err 1.26850783825
+improvement -0.0810071229935
+test error 1.26850783825
+Epoch Number: 21
+Epoch Number: 22
+Epoch Number: 23
+Epoch Number: 24
+Epoch Number: 25
+Epoch Number: 26
+Epoch Number: 27
+Epoch Number: 28
+Epoch Number: 29
+Epoch Number: 30
+========================================
+batch 30
+grad norm 0.017144
+CG steps 93
+using iteration 93
+err 0.000492585997563
+new_err 0.000280507752905
+improvement_ratio 0.890818335365
+damping 0.000357993839903
+min_improv -2.81091721263e-06
+l_rate 1.0
+l_rate_err 0.000280507752905
+improvement -0.000212078244658
+test error 0.000280507752905
+Epoch Number: 31
+Epoch Number: 32
+Epoch Number: 33
+Epoch Number: 34
+Epoch Number: 35
+Epoch Number: 36
+Epoch Number: 37
+Epoch Number: 38
+Epoch Number: 39
+Epoch Number: 40
+========================================
+batch 40
+grad norm 6.86693e-05
+CG steps 53
+using iteration 53
+err 4.86615272166e-06
+new_err 3.15260081152e-06
+improvement_ratio 0.913075190516
+damping 5.61454942259e-06
+min_improv -2.10631424125e-08
+l_rate 1.0
+l_rate_err 3.15260081152e-06
+improvement -1.71355191014e-06
+test error 3.15260081152e-06
+Epoch Number: 41
+Epoch Number: 42
+Epoch Number: 43
+minimum error reached
+[125, 64, 64, 4]
+index & self.W:
+12484
+12484
+Saving Weight Matrix W and network dimensions
+Finished Training: Recording outputs
+
+Training Successful \(0_0)/
