@@ -11,8 +11,8 @@ rm -f *.sh.o*
 # attention experiments
 #######################################################
 
-FILE="attention1.sh"
 ((i=1))
+FILE="attention$i.sh"
 while [ -f $FILE ];
 do
 	chmod +x $FILE;
@@ -29,8 +29,8 @@ echo ""
 # selection experiments
 #######################################################
 
-FILE="selection1.sh"
 ((i=1))
+FILE="selection$i.sh"
 while [ -f $FILE ];
 do
 	chmod +x $FILE;
@@ -47,8 +47,8 @@ echo ""
 # combined experiments
 #######################################################
 
-FILE="combined1.sh"
 ((i=1))
+FILE="combined$i.sh"
 while [ -f $FILE ];
 do
 	chmod +x $FILE;
