@@ -4,4 +4,4 @@
 #          Description
 # ------------------------------------------------------------------
 cd ..
-python experiment.py attention6
+python experiment.py attention6 experiments/attention6

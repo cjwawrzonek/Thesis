@@ -72,7 +72,8 @@ class experiment:
 		# Now read in the experiment line by line and fill in data
 		while i < len(lines):
 			if not lines[i].startswith("#") and lines[i] != '\n' and lines[i] != '':
-				line = lines[i].split("\t")
+				line = lines[i].split(None, 1)
+				# used to be line = lines[i].split('\t')
 				try:
 					self.exp[line[0]] = int(line[1])
 				except:
@@ -245,8 +246,16 @@ def dim_scale(array1D, new_dim):
 	return new_array
 
 def main():
+	if len(sys.argv) < 2:
+		raise Exception("Usage: python experiment.py [exp name] [optional: exp path]")
 	expName = sys.argv[1]
-	expPath = "{}/{}.exp".format(expName, expName)
+	if len(sys.argv) > 2:
+		expPath = sys.argv[2]
+		if not expPath.endswith('/'):
+			expPath += "/"
+		expPath += "{}.exp" + expName
+	else:
+		expPath = "{}/{}.exp".format(expName, expName)
 
 	e = experiment()
 	e.read(expPath)
