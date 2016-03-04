@@ -1,0 +1,315 @@
+------------------------------
+i am running on node09.cluster
+started at Fri Mar 4 06:27:53 EST 2016
+in /jukebox/buschman/Users/cjw5/Thesis/saccade/scripts
+by cjw5
+via the command:
+pni_submit combined2.sh
+------------------------------
+PyCuda not installed, or no compatible device detected
+Reading in experiment
+
+{u'delay': False, u'locs': False, u'cue': False}
+
+2444.0
+8189.0
+
+
+Experiment Data: 
+{'input_side': 11, 'description': 'combined experiment', 'train_file': 'combined2.train', 'phase_times': {u'delay': 5, u'output': 5, u'cue': 3, u'locs': 5}, 'init_weights': 'init_weights', 'num_locs': 4, 'name': 'combined2', 'input_layer': 125, 'hidden_layer': 25, 'train_pct': 50, 'loc_connect': 'false', 'out_layer': 4, 'directory': 'experiments/combined2/', 'total_length': 18, 'phase_var': {u'delay': False, u'locs': False, u'cue': False}, 'variance': 2, 'type': 'combined', 'train_shuffle': 'true'}
+
+experiments/combined2/combined2.train
+combined2
+Total number of inputSpaces is: 1
+Deleting Space Default Space.
+No more inputSpaces
+Beginning Training
+Epoch Number: 0
+========================================
+batch 0
+grad norm 19.5361
+CG steps 24
+using iteration 23
+err 21.1487102509
+new_err 2.71257090569
+improvement_ratio 1.32536401469
+damping 0.66
+min_improv -0.227789077759
+l_rate 1.0
+l_rate_err 2.71257090569
+improvement -18.4361393452
+test error 2.71257090569
+Epoch Number: 1
+Epoch Number: 2
+Epoch Number: 3
+Epoch Number: 4
+Epoch Number: 5
+Epoch Number: 6
+Epoch Number: 7
+Epoch Number: 8
+Epoch Number: 9
+Epoch Number: 10
+========================================
+batch 10
+grad norm 0.0305177
+CG steps 31
+using iteration 31
+err 1.88760387897
+new_err 1.88121938705
+improvement_ratio 0.902812853413
+damping 0.010351023414
+min_improv -8.65079183131e-05
+l_rate 1.0
+l_rate_err 1.88121938705
+improvement -0.00638449192047
+test error 1.88121938705
+Epoch Number: 11
+Epoch Number: 12
+Epoch Number: 13
+Epoch Number: 14
+Epoch Number: 15
+Epoch Number: 16
+Epoch Number: 17
+Epoch Number: 18
+Epoch Number: 19
+Epoch Number: 20
+========================================
+batch 20
+grad norm 5.22172
+CG steps 73
+using iteration 18
+err 1.69863784313
+new_err 1.69070577621
+improvement_ratio 0.0287936246305
+damping 0.00433123692012
+min_improv -0.00511758863926
+l_rate 1.0
+l_rate_err 1.69070577621
+improvement -0.00793206691742
+test error 1.69070577621
+Epoch Number: 21
+Epoch Number: 22
+Epoch Number: 23
+Epoch Number: 24
+Epoch Number: 25
+Epoch Number: 26
+Epoch Number: 27
+Epoch Number: 28
+Epoch Number: 29
+Epoch Number: 30
+========================================
+batch 30
+grad norm 80.5871
+CG steps 99
+using iteration 80
+err 0.919561266899
+new_err 0.984720647335
+improvement_ratio -0.847026053269
+damping 0.0325614270586
+min_improv -0.00119622468948
+l_rate 0.8
+l_rate_err 0.89637953043
+improvement -0.0231817364693
+test error 0.89637953043
+Epoch Number: 31
+Epoch Number: 32
+Epoch Number: 33
+Epoch Number: 34
+Epoch Number: 35
+Epoch Number: 36
+Epoch Number: 37
+Epoch Number: 38
+Epoch Number: 39
+Epoch Number: 40
+========================================
+batch 40
+grad norm 262.938
+CG steps 99
+using iteration 99
+err 0.680631101131
+new_err 0.663251936436
+improvement_ratio 0.871147681065
+damping 0.0315943201135
+min_improv -0.000275539159775
+l_rate 1.0
+l_rate_err 0.663251936436
+improvement -0.0173791646957
+test error 0.663251936436
+Epoch Number: 41
+Epoch Number: 42
+Epoch Number: 43
+Epoch Number: 44
+Epoch Number: 45
+Epoch Number: 46
+Epoch Number: 47
+Epoch Number: 48
+Epoch Number: 49
+Epoch Number: 50
+========================================
+batch 50
+grad norm 261.116
+CG steps 99
+using iteration 99
+err 0.572801470757
+new_err 0.564357995987
+improvement_ratio 0.489262055579
+damping 0.104508876858
+min_improv -0.000245295763016
+l_rate 1.0
+l_rate_err 0.564357995987
+improvement -0.00844347476959
+test error 0.564357995987
+Epoch Number: 51
+Epoch Number: 52
+Epoch Number: 53
+Epoch Number: 54
+Epoch Number: 55
+Epoch Number: 56
+Epoch Number: 57
+Epoch Number: 58
+Epoch Number: 59
+Epoch Number: 60
+========================================
+batch 60
+grad norm 454.841
+CG steps 99
+using iteration 99
+err 0.439615190029
+new_err 0.426595658064
+improvement_ratio 0.214668363586
+damping 0.153643725313
+min_improv -0.000848727226257
+l_rate 1.0
+l_rate_err 0.426595658064
+improvement -0.0130195319653
+test error 0.426595658064
+Epoch Number: 61
+Epoch Number: 62
+Epoch Number: 63
+Epoch Number: 64
+Epoch Number: 65
+Epoch Number: 66
+Epoch Number: 67
+Epoch Number: 68
+Epoch Number: 69
+Epoch Number: 70
+========================================
+batch 70
+grad norm 163.282
+CG steps 99
+using iteration 80
+err 0.144012376666
+new_err 0.130459144711
+improvement_ratio 0.837642148538
+damping 0.0432929345193
+min_improv -0.00024148017168
+l_rate 1.0
+l_rate_err 0.130459144711
+improvement -0.0135532319546
+test error 0.130459144711
+Epoch Number: 71
+Epoch Number: 72
+Epoch Number: 73
+Epoch Number: 74
+Epoch Number: 75
+Epoch Number: 76
+Epoch Number: 77
+Epoch Number: 78
+Epoch Number: 79
+Epoch Number: 80
+========================================
+batch 80
+grad norm 31.2601
+CG steps 99
+using iteration 80
+err 0.0526361055672
+new_err 0.512816131115
+improvement_ratio -19.8604328153
+damping 0.00350712323809
+min_improv -0.000394483208656
+l_rate 0.2097152
+l_rate_err 0.0505506806076
+improvement -0.00208542495966
+test error 0.0505506806076
+Epoch Number: 81
+Epoch Number: 82
+Epoch Number: 83
+Epoch Number: 84
+Epoch Number: 85
+Epoch Number: 86
+Epoch Number: 87
+Epoch Number: 88
+Epoch Number: 89
+Epoch Number: 90
+========================================
+batch 90
+grad norm 3.13747
+CG steps 99
+using iteration 99
+err 0.00529804546386
+new_err 0.0039736754261
+improvement_ratio 0.869816654418
+damping 0.0034029581708
+min_improv -1.85323413461e-05
+l_rate 1.0
+l_rate_err 0.0039736754261
+improvement -0.00132437003776
+test error 0.0039736754261
+Epoch Number: 91
+Epoch Number: 92
+Epoch Number: 93
+Epoch Number: 94
+Epoch Number: 95
+Epoch Number: 96
+Epoch Number: 97
+Epoch Number: 98
+Epoch Number: 99
+Epoch Number: 100
+========================================
+batch 100
+grad norm 0.0145866
+CG steps 99
+using iteration 99
+err 0.000148780134623
+new_err 9.80090626399e-05
+improvement_ratio 0.868314156866
+damping 8.0863406113e-05
+min_improv -6.98647199897e-07
+l_rate 1.0
+l_rate_err 9.80090626399e-05
+improvement -5.0771071983e-05
+test error 9.80090626399e-05
+Epoch Number: 101
+Epoch Number: 102
+Epoch Number: 103
+Epoch Number: 104
+Epoch Number: 105
+Epoch Number: 106
+Epoch Number: 107
+Epoch Number: 108
+Epoch Number: 109
+Epoch Number: 110
+========================================
+batch 110
+grad norm 0.00104054
+CG steps 99
+using iteration 99
+err 2.29909164773e-06
+new_err 1.50812377342e-06
+improvement_ratio 0.831295289341
+damping 1.26821062123e-06
+min_improv -1.13591795525e-08
+l_rate 1.0
+l_rate_err 1.50812377342e-06
+improvement -7.90967874309e-07
+test error 1.50812377342e-06
+Epoch Number: 111
+minimum error reached
+[125, 25, 25, 4]
+index & self.W:
+3904
+3904
+Saving Weight Matrix W and network dimensions
+Finished Training: Recording outputs
+
+Training Successful \(0_0)/

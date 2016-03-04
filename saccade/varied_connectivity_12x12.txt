@@ -268,3 +268,1884 @@ New total with additions
 8146.0
 Total Possible
 256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8129.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8176.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8121.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8129.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8120.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8076.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8075.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8094.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8197.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8199.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8069.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8165.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8237.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8100.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8183.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8142.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8290.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8110.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8134.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8057.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8085.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8117.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8142.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8214.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8067.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8137.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8164.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8135.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8161.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8065.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8189.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8114.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8106.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8113.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8068.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8137.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8166.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8122.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8106.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8106.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8162.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8158.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8150.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8188.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8201.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8161.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8061.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8141.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8081.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8120.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8179.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8146.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8131.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8189.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8123.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8194.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8131.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8210.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8101.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8204.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8055.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8112.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8242.0
+Total Possible
+4096
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8179.0
+Total Possible
+625
+
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8157.0
+Total Possible
+625
+6
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8146.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8158.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8131.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8024.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8134.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8115.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8152.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8123.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8170.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8182.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8065.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8128.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8093.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8185.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8026.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8040.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8197.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8215.0
+Total Possible
+4096
+
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8052.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8156.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8217.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8199.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8046.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8149.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8112.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8160.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8141.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8212.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8108.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8157.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8212.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8174.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8105.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8047.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8175.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8165.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8206.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8149.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8150.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8203.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8125.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8018.0
+Total Possible
+625
+
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8106.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8177.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8212.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8147.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8072.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8028.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8146.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8168.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8161.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8150.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8049.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8248.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8069.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8239.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8174.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8095.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8234.0
+Total Possible
+625
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8110.0
+Total Possible
+256
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8152.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8192.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8119.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8149.0
+Total Possible
+4096
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8159.0
+Total Possible
+20736
+
+Sigma = 4
+
+CG_iter = 100 - manually changed
+total available from original mask
+2444.0
+New total with additions
+8123.0
+Total Possible
+4096
+err = 
+7.27905216991e-07
+#################################
+
+err = 
+7.52058269882e-07
+#################################
+
+err = 
+7.05215825292e-07
+#################################
+
+err = 
+8.57714269387e-07
+#################################
+
+err = 
+8.08187299602e-07
+#################################
+
+err = 
+8.17302407086e-07
+#################################
+
+err = 
+9.52652120153e-07
+#################################
+
+err = 
+8.72179214184e-07
+#################################
+
+err = 
+9.60149804996e-07
+#################################
+
+err = 
+8.50844192731e-07
+#################################
+
+err = 
+6.63537321088e-07
+#################################
+
+err = 
+8.86643647391e-07
+#################################
+
+err = 
+9.26944437651e-07
+#################################
+
+err = 
+8.72711552802e-07
+#################################
+
+err = 
+8.12577657901e-07
+#################################
+
+err = 
+6.89415742272e-07
+#################################
+
+err = 
+7.81601158906e-07
+#################################
+
+err = 
+6.94409739784e-07
+#################################
+
+err = 
+6.85828354108e-07
+#################################
+
+err = 
+6.86006160322e-07
+#################################
+
+err = 
+9.97794738093e-07
+#################################
+
+err = 
+8.5752361656e-07
+#################################
+
+err = 
+6.82326515289e-07
+#################################
+
+err = 
+8.64880689733e-07
+#################################
+
+err = 
+7.52026096507e-07
+#################################
+
+err = 
+6.96207450801e-07
+#################################
+
+err = 
+7.66457787904e-07
+#################################
+
+err = 
+7.13281754846e-07
+#################################
+
+err = 
+6.80928527193e-07
+#################################
+
+err = 
+0.000977673800662
+#################################
+
+err = 
+8.13534654753e-07
+#################################
+
+err = 
+9.57834648337e-07
+#################################
+
+err = 
+1.606431033e-05
+#################################
+
+err = 
+9.43067959724e-07
+#################################
+
+err = 
+8.89706143425e-07
+#################################
+
+err = 
+9.87087105386e-07
+#################################
+
+err = 
+7.44969952393e-07
+#################################
+
+err = 
+9.67203732216e-07
+#################################
+
+err = 
+8.96640358405e-07
+#################################
+
+err = 
+0.000122399088771
+#################################
+
+err = 
+7.63329353504e-07
+#################################
+
+err = 
+0.0781251490116
+#################################
+
+err = 
+6.48453881998e-07
+#################################
+
+err = 
+0.0448530316353
+#################################
+
+err = 
+6.95252917164e-07
+#################################
+
+err = 
+0.0520834177732
+#################################
+
+err = 
+0.000112516056106
+#################################
+
+err = 
+0.000347738619894
+#################################
+
+err = 
+0.000293356576003
+#################################
+
+err = 
+0.000362434634008
+#################################
+
+err = 
+0.000103493958401
+#################################
+
+err = 
+0.0806739230951
+#################################
+
+err = 
+0.251467926162
+#################################
+
+err = 
+4.06560648116e-05
+#################################
+
+err = 
+0.00243218349559
+#################################
+
+err = 
+7.63794814702e-05
+#################################
+
+err = 
+0.19950671494
+#################################
+
+err = 
+0.000269208289683
+#################################
+
+err = 
+2.16965665459e-05
+#################################
+
+err = 
+9.40554571116e-07
+#################################
+
+err = 
+0.0906260967255
+#################################
+
+err = 
+2.00371747875e-05
+#################################
+
+err = 
+0.0172338287036
+#################################
+
+err = 
+0.0153374175231
+#################################
+
+err = 
+2.75766526881e-05
+#################################
+
+err = 
+0.200932213238
+#################################
+
+err = 
+0.022617695587
+#################################
+
+err = 
+0.895878493786
+#################################
+
+err = 
+0.0285189598799
+#################################
+
+err = 
+0.0316611789167
+#################################
+
+err = 
+0.0141010954976
+#################################
+
+err = 
+0.00222450727597
+#################################
+
+err = 
+nan
+#################################
+
+err = 
+2.77480758086e-05
+#################################
+
+err = 
+0.0945068381049
+#################################
+
+err = 
+0.000232349712557
+#################################
+
+err = 
+0.000532789452171
+#################################
+
+err = 
+5.28616365045e-05
+#################################
+
+err = 
+2.12860162719e-05
+#################################
+
+err = 
+6.15177310205e-05
+#################################
+
+err = 
+2.80844445418e-05
+#################################
+
+err = 
+1.12302477646e-05
+#################################
+
+err = 
+0.00105665284874
+#################################
+
+err = 
+0.00142866442911
+#################################
+
+err = 
+0.000369830323117
+#################################
+
+err = 
+0.11720632712
+#################################
+
+err = 
+0.000496575981379
+#################################
+
+err = 
+0.0861570388079
+#################################
+
+err = 
+9.1708103095e-06
+#################################
+
+err = 
+6.10112900696e-06
+#################################
+
+err = 
+0.00636038649827
+#################################
+
+err = 
+7.51177185521e-06
+#################################
+
+err = 
+0.117455948483
+#################################
+
+err = 
+0.00109393767674
+#################################
+
+err = 
+0.224468686364
+#################################
+
+err = 
+9.12997173145e-05
+#################################
+
+err = 
+2.80255626421e-05
+#################################
+
+err = 
+0.00020083039999
+#################################
+
+err = 
+0.00122104358992
+#################################
+
+err = 
+0.000596590207091
+#################################
+
+err = 
+7.19284143997e-06
+#################################
+
+err = 
+0.000367277053495
+#################################
+
+err = 
+0.226859060923
+#################################
+
+err = 
+0.0195273607969
+#################################
+
+err = 
+0.000303690350847
+#################################
+
+err = 
+0.0440122286479
+#################################
+
+err = 
+0.00029600962686
+#################################
+
+err = 
+2.14138064101e-05
+#################################
+
+err = 
+6.95540026451e-05
+#################################
+
+err = 
+5.94560988247e-05
+#################################
+
+err = 
+1.36070787751e-05
+#################################
+
+err = 
+0.000693500391208
+#################################
+
+err = 
+0.00108870153781
+#################################
+
+err = 
+3.75436710393e-05
+#################################
+
+err = 
+9.0001589602e-06
+#################################
+
+err = 
+0.0133747919039
+#################################
+
+err = 
+1.42721701195e-05
+#################################
+
+err = 
+2.59742611723e-05
+#################################
+
+err = 
+3.37389514739e-05
+#################################
+
+err = 
+2.47827527346e-05
+#################################
+
+err = 
+0.0793759822845
+#################################
+
+err = 
+0.0129473000765
+#################################
+
+err = 
+3.12469076432e-05
+#################################
+
+err = 
+1.87005228197e-05
+#################################
+
+err = 
+0.000136221041127
+#################################
+
+err = 
+0.000465172405044
+#################################
+
+err = 
+0.00022650823618
+#################################
+
+err = 
+0.00139799050521
+#################################
+
+err = 
+8.44531958657e-05
+#################################
+
+err = 
+1.75063833012e-05
+#################################
+
+err = 
+4.18207600887e-05
+#################################
+
+err = 
+0.000412571921267
+#################################
+
+err = 
+5.5012896403e-05
+#################################
+
+err = 
+5.03550717522e-05
+#################################
+
+err = 
+0.000886687011059
+#################################
+
+err = 
+9.68390876161e-06
+#################################
+
+err = 
+2.87448596542e-05
+#################################
+
+err = 
+3.72655767327e-05
+#################################
+
+err = 
+1.70129584149e-05
+#################################
+
+err = 
+0.0292903423309
+#################################
+
+err = 
+8.06323441793e-05
+#################################
+
+err = 
+0.000189159933308
+#################################
+

@@ -1,0 +1,175 @@
+------------------------------
+i am running on node52.cluster
+started at Fri Mar 4 06:27:56 EST 2016
+in /jukebox/buschman/Users/cjw5/Thesis/saccade/scripts
+by cjw5
+via the command:
+pni_submit combined15.sh
+------------------------------
+PyCuda not installed, or no compatible device detected
+Reading in experiment
+
+{u'delay': False, u'locs': False, u'cue': False}
+
+2444.0
+8149.0
+
+
+Experiment Data: 
+{'input_side': 11, 'description': 'combined experiment', 'train_file': 'combined15.train', 'phase_times': {u'delay': 5, u'output': 5, u'cue': 3, u'locs': 5}, 'init_weights': 'init_weights', 'num_locs': 4, 'name': 'combined15', 'input_layer': 125, 'hidden_layer': 64, 'train_pct': 100, 'loc_connect': 'false', 'out_layer': 4, 'directory': 'experiments/combined15/', 'total_length': 18, 'phase_var': {u'delay': False, u'locs': False, u'cue': False}, 'variance': 2, 'type': 'combined', 'train_shuffle': 'true'}
+
+experiments/combined15/combined15.train
+combined15
+Total number of inputSpaces is: 1
+Deleting Space Default Space.
+No more inputSpaces
+Beginning Training
+Epoch Number: 0
+========================================
+batch 0
+grad norm 16.0026
+CG steps 35
+using iteration 35
+err 8.32312774658
+new_err 2.52176380157
+improvement_ratio 1.02922185452
+damping 0.66
+min_improv -0.106683626175
+l_rate 1.0
+l_rate_err 2.52176380157
+improvement -5.80136394501
+test error 2.52176380157
+Epoch Number: 1
+Epoch Number: 2
+Epoch Number: 3
+Epoch Number: 4
+Epoch Number: 5
+Epoch Number: 6
+Epoch Number: 7
+Epoch Number: 8
+Epoch Number: 9
+Epoch Number: 10
+========================================
+batch 10
+grad norm 0.0488507
+CG steps 39
+using iteration 37
+err 1.8935491244
+new_err 1.88286511103
+improvement_ratio 0.945409005109
+damping 0.010351023414
+min_improv -0.00014085713774
+l_rate 1.0
+l_rate_err 1.88286511103
+improvement -0.0106840133667
+test error 1.88286511103
+Epoch Number: 11
+Epoch Number: 12
+Epoch Number: 13
+Epoch Number: 14
+Epoch Number: 15
+Epoch Number: 16
+Epoch Number: 17
+Epoch Number: 18
+Epoch Number: 19
+Epoch Number: 20
+========================================
+batch 20
+grad norm 2.48302
+CG steps 99
+using iteration 99
+err 1.6826321284
+new_err 1.65190203985
+improvement_ratio 0.100124607458
+damping 0.00984372027301
+min_improv -0.00446963876486
+l_rate 1.0
+l_rate_err 1.65190203985
+improvement -0.0307300885518
+test error 1.65190203985
+Epoch Number: 21
+Epoch Number: 22
+Epoch Number: 23
+Epoch Number: 24
+Epoch Number: 25
+Epoch Number: 26
+Epoch Number: 27
+Epoch Number: 28
+Epoch Number: 29
+Epoch Number: 30
+========================================
+batch 30
+grad norm 37.4005
+CG steps 99
+using iteration 80
+err 0.470871845881
+new_err 0.301591296991
+improvement_ratio 0.973690841062
+damping 0.00945583841781
+min_improv -0.00278104066849
+l_rate 1.0
+l_rate_err 0.301591296991
+improvement -0.16928054889
+test error 0.301591296991
+Epoch Number: 31
+Epoch Number: 32
+Epoch Number: 33
+Epoch Number: 34
+Epoch Number: 35
+Epoch Number: 36
+Epoch Number: 37
+Epoch Number: 38
+Epoch Number: 39
+Epoch Number: 40
+========================================
+batch 40
+grad norm 0.0131467
+CG steps 91
+using iteration 91
+err 0.0010126720493
+new_err 0.000649877746279
+improvement_ratio 0.914871196368
+damping 0.000773746771985
+min_improv -4.48887294624e-06
+l_rate 1.0
+l_rate_err 0.000649877746279
+improvement -0.000362794303025
+test error 0.000649877746279
+Epoch Number: 41
+Epoch Number: 42
+Epoch Number: 43
+Epoch Number: 44
+Epoch Number: 45
+Epoch Number: 46
+Epoch Number: 47
+Epoch Number: 48
+Epoch Number: 49
+Epoch Number: 50
+========================================
+batch 50
+grad norm 7.55597e-05
+CG steps 78
+using iteration 78
+err 1.22935161926e-05
+new_err 7.92272900677e-06
+improvement_ratio 0.914213494212
+damping 1.21349559899e-05
+min_improv -5.37558844371e-08
+l_rate 1.0
+l_rate_err 7.92272900677e-06
+improvement -4.37078718581e-06
+test error 7.92272900677e-06
+Epoch Number: 51
+Epoch Number: 52
+Epoch Number: 53
+Epoch Number: 54
+Epoch Number: 55
+minimum error reached
+[125, 64, 64, 4]
+index & self.W:
+12484
+12484
+Saving Weight Matrix W and network dimensions
+Finished Training: Recording outputs
+
+Training Successful \(0_0)/

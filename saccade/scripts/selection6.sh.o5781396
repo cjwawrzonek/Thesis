@@ -1,0 +1,194 @@
+------------------------------
+i am running on node27.cluster
+started at Fri Mar 4 06:27:53 EST 2016
+in /jukebox/buschman/Users/cjw5/Thesis/saccade/scripts
+by cjw5
+via the command:
+pni_submit selection6.sh
+------------------------------
+PyCuda not installed, or no compatible device detected
+Reading in experiment
+
+{u'delay': False, u'locs': False, u'cue': False}
+
+2444.0
+8194.0
+
+
+Experiment Data: 
+{'input_side': 11, 'description': 'selection experiment', 'train_file': 'selection6.train', 'phase_times': {u'delay': 5, u'output': 5, u'cue': 3, u'locs': 5}, 'init_weights': 'init_weights', 'num_locs': 4, 'name': 'selection6', 'input_layer': 125, 'hidden_layer': 25, 'train_pct': 75, 'loc_connect': 'false', 'out_layer': 4, 'directory': 'experiments/selection6/', 'total_length': 18, 'phase_var': {u'delay': False, u'locs': False, u'cue': False}, 'variance': 2, 'type': 'selection', 'train_shuffle': 'true'}
+
+experiments/selection6/selection6.train
+selection6
+Total number of inputSpaces is: 1
+Deleting Space Default Space.
+No more inputSpaces
+Beginning Training
+Epoch Number: 0
+========================================
+batch 0
+grad norm 18.0503
+CG steps 25
+using iteration 18
+err 13.4539251328
+new_err 2.7293844223
+improvement_ratio 1.03106027196
+damping 0.66
+min_improv -0.188656234741
+l_rate 1.0
+l_rate_err 2.7293844223
+improvement -10.7245407104
+test error 2.7293844223
+Epoch Number: 1
+Epoch Number: 2
+Epoch Number: 3
+Epoch Number: 4
+Epoch Number: 5
+Epoch Number: 6
+Epoch Number: 7
+Epoch Number: 8
+Epoch Number: 9
+Epoch Number: 10
+========================================
+batch 10
+grad norm 0.0258048
+CG steps 30
+using iteration 29
+err 1.88451778889
+new_err 1.87959694862
+improvement_ratio 0.906841266582
+damping 0.010351023414
+min_improv -6.64707180113e-05
+l_rate 1.0
+l_rate_err 1.87959694862
+improvement -0.00492084026337
+test error 1.87959694862
+Epoch Number: 11
+Epoch Number: 12
+Epoch Number: 13
+Epoch Number: 14
+Epoch Number: 15
+Epoch Number: 16
+Epoch Number: 17
+Epoch Number: 18
+Epoch Number: 19
+Epoch Number: 20
+========================================
+batch 20
+grad norm 0.00122677
+CG steps 69
+using iteration 69
+err 1.87486922741
+new_err 1.87263846397
+improvement_ratio 3.57018370458
+damping 0.000162338917754
+min_improv -6.84526050463e-06
+l_rate 1.0
+l_rate_err 1.87263846397
+improvement -0.00223076343536
+test error 1.87263846397
+Epoch Number: 21
+Epoch Number: 22
+Epoch Number: 23
+Epoch Number: 24
+Epoch Number: 25
+Epoch Number: 26
+Epoch Number: 27
+Epoch Number: 28
+Epoch Number: 29
+Epoch Number: 30
+========================================
+batch 30
+grad norm 4.50626
+CG steps 85
+using iteration 48
+err 1.42273056507
+new_err 0.962304890156
+improvement_ratio 0.705983815856
+damping 0.00624085335575
+min_improv -0.0116027772427
+l_rate 1.0
+l_rate_err 0.962304890156
+improvement -0.460425674915
+test error 0.962304890156
+Epoch Number: 31
+Epoch Number: 32
+Epoch Number: 33
+Epoch Number: 34
+Epoch Number: 35
+Epoch Number: 36
+Epoch Number: 37
+Epoch Number: 38
+Epoch Number: 39
+Epoch Number: 40
+========================================
+batch 40
+grad norm 0.0160872
+CG steps 49
+using iteration 49
+err 0.0115083875135
+new_err 0.00754469400272
+improvement_ratio 0.925523791943
+damping 0.00395665962947
+min_improv -4.84815519303e-05
+l_rate 1.0
+l_rate_err 0.00754469400272
+improvement -0.00396369351074
+test error 0.00754469400272
+Epoch Number: 41
+Epoch Number: 42
+Epoch Number: 43
+Epoch Number: 44
+Epoch Number: 45
+Epoch Number: 46
+Epoch Number: 47
+Epoch Number: 48
+Epoch Number: 49
+Epoch Number: 50
+========================================
+batch 50
+grad norm 0.000644844
+CG steps 72
+using iteration 72
+err 0.000118553733046
+new_err 7.31387990527e-05
+improvement_ratio 0.917640864267
+damping 6.20537522211e-05
+min_improv -5.64065448998e-07
+l_rate 1.0
+l_rate_err 7.31387990527e-05
+improvement -4.5414933993e-05
+test error 7.31387990527e-05
+Epoch Number: 51
+Epoch Number: 52
+Epoch Number: 53
+Epoch Number: 54
+Epoch Number: 55
+Epoch Number: 56
+Epoch Number: 57
+Epoch Number: 58
+Epoch Number: 59
+Epoch Number: 60
+========================================
+batch 60
+grad norm 1.99112e-05
+CG steps 77
+using iteration 77
+err 1.33034666305e-06
+new_err 8.72179214184e-07
+improvement_ratio 0.913878526829
+damping 9.73211882072e-07
+min_improv -5.62193349651e-09
+l_rate 1.0
+l_rate_err 8.72179214184e-07
+improvement -4.58167448869e-07
+test error 8.72179214184e-07
+minimum error reached
+[125, 25, 25, 4]
+index & self.W:
+3904
+3904
+Saving Weight Matrix W and network dimensions
+Finished Training: Recording outputs
+
+Training Successful \(0_0)/

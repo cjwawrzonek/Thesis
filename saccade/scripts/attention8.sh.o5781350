@@ -1,0 +1,124 @@
+------------------------------
+i am running on node50.cluster
+started at Fri Mar 4 06:27:53 EST 2016
+in /jukebox/buschman/Users/cjw5/Thesis/saccade/scripts
+by cjw5
+via the command:
+pni_submit attention8.sh
+------------------------------
+PyCuda not installed, or no compatible device detected
+Reading in experiment
+
+{u'delay': False, u'locs': False, u'cue': False}
+
+2444.0
+8176.0
+
+
+Experiment Data: 
+{'input_side': 11, 'description': 'attention experiment', 'train_file': 'attention8.train', 'phase_times': {u'delay': 5, u'output': 5, u'cue': 3, u'locs': 5}, 'init_weights': 'init_weights', 'num_locs': 4, 'name': 'attention8', 'input_layer': 125, 'hidden_layer': 144, 'train_pct': 75, 'loc_connect': 'false', 'out_layer': 4, 'directory': 'experiments/attention8/', 'total_length': 18, 'phase_var': {u'delay': False, u'locs': False, u'cue': False}, 'variance': 2, 'type': 'attention', 'train_shuffle': 'true'}
+
+experiments/attention8/attention8.train
+attention8
+Total number of inputSpaces is: 1
+Deleting Space Default Space.
+No more inputSpaces
+Beginning Training
+Epoch Number: 0
+========================================
+batch 0
+grad norm 37.0772
+CG steps 85
+using iteration 62
+err 20.7618408203
+new_err 2.54247903824
+improvement_ratio 1.05500595859
+damping 0.66
+min_improv -0.327798042297
+l_rate 1.0
+l_rate_err 2.54247903824
+improvement -18.2193617821
+test error 2.54247903824
+Epoch Number: 1
+Epoch Number: 2
+Epoch Number: 3
+Epoch Number: 4
+Epoch Number: 5
+Epoch Number: 6
+Epoch Number: 7
+Epoch Number: 8
+Epoch Number: 9
+Epoch Number: 10
+========================================
+batch 10
+grad norm 9.78205
+CG steps 99
+using iteration 99
+err 1.26270639896
+new_err 1.01554965973
+improvement_ratio 0.665052712531
+damping 0.0156833688091
+min_improv -0.00532635688782
+l_rate 1.0
+l_rate_err 1.01554965973
+improvement -0.247156739235
+test error 1.01554965973
+Epoch Number: 11
+Epoch Number: 12
+Epoch Number: 13
+Epoch Number: 14
+Epoch Number: 15
+Epoch Number: 16
+Epoch Number: 17
+Epoch Number: 18
+Epoch Number: 19
+Epoch Number: 20
+========================================
+batch 20
+grad norm 0.023875
+CG steps 99
+using iteration 99
+err 0.000154047971591
+new_err 0.000105135462945
+improvement_ratio 0.92137288656
+damping 0.000245968057203
+min_improv -5.89246192249e-07
+l_rate 1.0
+l_rate_err 0.000105135462945
+improvement -4.8912508646e-05
+test error 0.000105135462945
+Epoch Number: 21
+Epoch Number: 22
+Epoch Number: 23
+Epoch Number: 24
+Epoch Number: 25
+Epoch Number: 26
+Epoch Number: 27
+Epoch Number: 28
+Epoch Number: 29
+Epoch Number: 30
+========================================
+batch 30
+grad norm 0.000875877
+CG steps 99
+using iteration 99
+err 2.75053184851e-06
+new_err 1.78687082553e-06
+improvement_ratio 0.911644611783
+damping 3.85760775637e-06
+min_improv -1.19244805319e-08
+l_rate 1.0
+l_rate_err 1.78687082553e-06
+improvement -9.63661022979e-07
+test error 1.78687082553e-06
+Epoch Number: 31
+Epoch Number: 32
+minimum error reached
+[125, 144, 144, 4]
+index & self.W:
+39604
+39604
+Saving Weight Matrix W and network dimensions
+Finished Training: Recording outputs
+
+Training Successful \(0_0)/
