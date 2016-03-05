@@ -46,6 +46,7 @@ class HessianBackprop(object):
             self.n_params[i] += (self.layers[i] + 1) * self.layers[i + 1]
         self.inputs = None
         self.targets = None
+        self.activations = None
 
         self.init_weights()
 
@@ -170,9 +171,6 @@ class HessianBackprop(object):
         # print len(W[2])
         # print len(W[2][0])
 
-        # exit()
-
-        # f = open("file", 'wb+')
         weights = open("hidden_weights.txt", 'rb+')
         mask = open("hidden_mask.txt", 'rb+')
 
@@ -663,18 +661,20 @@ class HessianBackprop(object):
         self.damping = init_damping
         test_errs = []
 
-        if plotting:
-            # data is dumped out to file so that the plots can be
-            # displayed/updated in parallel (see dataplotter.py)
-            plots = {}
-            plot_vars = ["new_err", "l_rate", "np.linalg.norm(delta)",
-                         "self.damping", "np.linalg.norm(self.W)",
-                         "deltas[-1][0]", "test_errs[-1]"]
-            for v in plot_vars:
-                plots[v] = []
+        # This stuff is for some sort of plotting function that I haven't looked at yet
 
-            with open("HF_plots.pkl", "wb") as f:
-                pickle.dump(plots, f)
+        # if plotting:
+        #     # data is dumped out to file so that the plots can be
+        #     # displayed/updated in parallel (see dataplotter.py)
+        #     plots = {}
+        #     plot_vars = ["new_err", "l_rate", "np.linalg.norm(delta)",
+        #                  "self.damping", "np.linalg.norm(self.W)",
+        #                  "deltas[-1][0]", "test_errs[-1]"]
+        #     for v in plot_vars:
+        #         plots[v] = []
+
+        #     with open("HF_plots.pkl", "wb") as f:
+        #         pickle.dump(plots, f)
 
         for i in range(max_epochs):
             print "Epoch Number: {}".format(i)
@@ -858,18 +858,22 @@ class HessianBackprop(object):
                 #                  / float(len(test[0])))
                 #     print "classification error", class_err
 
+            # This stuff is for some sort of plotting function that I haven't looked at yet
+
             # dump plot data
-            if plotting:
-                for v in plot_vars:
-                    plots[v] += [eval(v)]
+            # if plotting:
+            #     for v in plot_vars:
+            #         plots[v] += [eval(v)]
  
-                with open("HF_plots.pkl", "wb") as f:
-                    pickle.dump(plots, f)
+            #     with open("HF_plots.pkl", "wb") as f:
+            #         pickle.dump(plots, f)
+
+            # Also some sort of extra dumping stuff that I removed
 
             # dump weights
-            if i % print_period == 0:
-                with open("HF_weights.pkl", "wb") as f:
-                    pickle.dump(self.W, f)
+            # if i % print_period == 0:
+            #     with open("HF_weights.pkl", "wb") as f:
+            #         pickle.dump(self.W, f)
 
             # check for termination
             if test_errs[-1] < 1e-6:

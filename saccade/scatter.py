@@ -51,7 +51,7 @@ def scatter(dataPath, wFile, inputFile, imageFile=None):
     if not dataPath.endswith('/'):
         dataPath += '/'
         
-    ret = util.readInputs(dataPath + inputFile)
+    ret = util.readTrials(dataPath + inputFile)
 
     inputs = ret['inputs']
     targets = ret['targets']

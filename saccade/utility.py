@@ -35,18 +35,19 @@ def question(question, default="yes"):
             sys.stdout.write("Please respond with 'yes' or 'no' "
                              "(or 'y' or 'n').\n")
 
-##################################################
+########################################################
 # Reads in a set of inputs and targets from a file
 #
 # argumetns:
-# inputFile - file with inputs and targets to read
+# filePath - file path with inputs and targets 
+#   to read starting from directory of utility.py
 # returns - dictionary with inputs and outputs
-##################################################
-def readInputs(inputFile):
+########################################################
+def readTrials(filePath):
 
     # Read the inputs and targets
     #############################################
-    fstim = open(inputFile, 'rb')
+    fstim = open(filePath, 'rb')
 
     #for fixed training
     # fstim = open("DSTrainFixed.txt", 'rb')
@@ -160,7 +161,7 @@ def readW(wFilePath):
 # wFilePath - file with inputs and targets to read
 ####################################################
 def writeW(layers, W, wFilePath):
-    Wfile = open(wFilePath, "wb+")
+    Wfile = open(wFilePath, "r+b")
 
     Wfile.write(str(layers))
     Wfile.write("\n")
@@ -176,8 +177,8 @@ def writeW(layers, W, wFilePath):
 # outSet - dictionary with outputs
 # filePath - file path to write data
 ####################################################
-def writeTrial(inSet, outSet, filePath, shuffle=False):
-    f = open(filePath, "wb+")
+def writeTrials(inSet, outSet, filePath, shuffle=False):
+    f = open(filePath, "r+b")
 
     if (len(inSet) != len(outSet)):
         raise NameError("Erorr: Input and Output length are not equal.")

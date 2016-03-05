@@ -48,7 +48,7 @@ def anova(dataPath, wFile, inputFile, imageFile=None):
     if not dataPath.endswith('/'):
         dataPath += '/'
         
-    ret = util.readInputs(dataPath + inputFile)
+    ret = util.readTrials(dataPath + inputFile)
 
     ##########################################################
     # must find way to generalize this value

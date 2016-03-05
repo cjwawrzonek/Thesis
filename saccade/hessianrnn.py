@@ -35,7 +35,7 @@ class HessianRNN(HessianBackprop):
         super(HessianRNN, self).__init__(**kwargs)
 
         if self.loadW != False and self.loadW != None:
-
+            print "Loading previous weights..."
             ret = util.readW(self.dataPath + self.loadW)
             self.W = ret["W"]
 

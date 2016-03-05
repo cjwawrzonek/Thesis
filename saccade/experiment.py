@@ -29,24 +29,19 @@ class experiment:
 	'''experiment variables'''
 	# None at the moment
 
-	def __init__(self, filepath=None, name="Uninitialized Experiment"):
+	def __init__(self, name="Uninitialized Experiment"):
 		self.name = name
 		self.initialized = False
 		self.trained = False
 		self.num_trains = 0
 		self.trained = False
 		self.exp = {} # this is our experiment meta-data. Dictionary with lots of parameters
+		self.filepath = None
+		self.W = None
+
+	def read(self, filepath, W=None):
+
 		self.filepath = filepath
-
-		if filepath != None:
-			read(filepath)
-
-	def read(self, filepath=None):
-
-		if filepath == None:
-			filepath = self.filepath
-		else:
-			self.filepath = filepath
 
 		if self.filepath == None:
 			raise Exception("No filepath initialized for this experiment")
@@ -67,7 +62,7 @@ class experiment:
 		# First, set a line index for reading in the input
 		i = 0
 
-		print "Reading in experiment\n"
+		print "Reading in experiment"
 
 		# Now read in the experiment line by line and fill in data
 		while i < len(lines):
@@ -91,7 +86,6 @@ class experiment:
 
 		# get the dictionary of delay times
 		self.exp['phase_var'] = json.loads(self.exp['phase_var'])
-		print self.exp['phase_var']
 
 		for phase in self.exp['phase_times']:
 			self.exp['phase_times'][phase] = int(self.exp['phase_times'][phase])
@@ -115,8 +109,13 @@ class experiment:
 
 		self.exp['input_layer'] = self.exp['input_side']*self.exp['input_side'] + 4
 
+		if W == True:
+			self.W = "W"
+		else:
+			self.W = W
+
 		self.rnn = HessianRNN(layers=[self.exp['input_layer'], self.exp['hidden_layer'], self.exp['out_layer']], struc_damping=0.5,
-					 use_GPU=False, debug=False, loadW=False, dataPath=self.exp['directory'])
+					 use_GPU=False, debug=False, loadW=self.W, dataPath=self.exp['directory'])
 
 		np.set_printoptions(edgeitems = 10)
 
@@ -125,8 +124,6 @@ class experiment:
 	def createTrainSet(self):
 
 		trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
-		print trainFilepath
-		print self.exp['name']
 
 		if self.exp['type'] == "simple":
 			pass # ig.simpleGen()
@@ -149,9 +146,9 @@ class experiment:
 		if self.exp['directory'] == None or self.exp['directory'] == '':
 			trainFilepath = self.exp['train_file']
 		else:
-			trainFilepath = "{}/{}".format(self.exp['directory'], self.exp['train_file'])
+			trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
 
-		ret = util.readInputs(trainFilepath)
+		ret = util.readTrials(trainFilepath)
 
 		inputs = ret['inputs']
 		targets = ret['targets']
@@ -184,11 +181,23 @@ class experiment:
 	def test(self, W=None):
 		raise Exception("Function not implemented yet")
 
+	def trainError(self):
+		"""Compute RMS error."""
+
+		if self.exp['directory'] == None or self.exp['directory'] == '':
+			trainFilepath = self.exp['train_file']
+		else:
+			trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
+
+		ret = util.readTrials(trainFilepath)
+
+		return self.rnn.error(inputs=ret['inputs'], targets=ret['targets'])
+
 	def __repr__(self):
 		return "Experiment Object, Name: {}".format(self.name)
 
 	def __str__(self):
-		return "\nExperiment Data: \n{}\n".format(self.exp)
+		return "\nExperiment Data: \n\n{}\n".format(self.exp)
 
 def train_saccade(cycle, input_types, target_types,
 				  inputs, targets, rnn,

@@ -10,23 +10,12 @@ import random
 import utility as util # my standard library
 import pprint as pp
 
-def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=False, shuffle=True):
-	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
-
-	selection_time = phase_times['cue']
-	stim_time = phase_times['locs']
-	delay_time = phase_times['delay']
-	output_time = phase_times['output']
-
-	# reps determines how thorough the training is
-	#*
-	reps = int(round((locations - 1) * (float(train_pct) / 100)))
-
+def createTargets(numLocs):
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
 	targets = []
 
-	center = int(round(n / 2))
+	center = int(round(numLocs / 2))
 
 	#now we have to generate the targets
 	for i in range(locations):
@@ -53,11 +42,27 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=Fal
 		# print targets[-1]
 		# space.printSpace(i)
 
+	return targets
+
+def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=False, shuffle=True):
+	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
+
+	selection_time = phase_times['cue']
+	stim_time = phase_times['locs']
+	delay_time = phase_times['delay']
+	output_time = phase_times['output']
+
+	# reps determines how thorough the training is
+	#*
+	reps = int(round((locations - 1) * (float(train_pct) / 100)))
+
+	targets = createTargets(n)
+
 	# Create the output file name string
 	if filepath is None:
 		raise Exception("The filepath is 'None'")
 	else:
-		fname = filepath
+		finputs = filepath
 
 	#######################################################################
 	# inputSet will be a 3 x num inputs dictionary as follows
@@ -325,11 +330,11 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=Fal
 	# END FIRST BIG LOOP
 
 	#*
-	funused = open(fname + "_UnusedLocations", "wb+")
+	funused = open(finputs + "_UnusedLocations", "wb+")
 	pp.pprint(unused_pairs, funused)
 	funused.close()
 
-	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
+	util.writeTrials(inputSet, outSet, finputs, shuffle=shuffle)
 
 def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
@@ -343,42 +348,13 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	space = ips.inputSpace(n)
-	space.createInputs(locations)
-	targets = []
-
-	center = int(round(n / 2))
-
-	#now we have to generate the targets
-	for i in range(locations):
-		coor = space.getCoor(i)
-		dx = (coor[1] - center) / center
-		dy = (coor[0] - center) / center
-
-		# store the deviation from the center in our two x coor variables
-		if dx >= 0:
-			dxPlus = dx
-			dxMinus = 0
-		else:
-			dxPlus = 0
-			dxMinus = abs(dx)
-
-		if dy >= 0:
-			dyPlus = 0
-			dyMinus = dy
-		else:
-			dyPlus = abs(dy)
-			dyMinus = 0
-
-		targets.append([dxPlus, dxMinus, dyPlus, dyMinus])
-		# print targets[-1]
-		# space.printSpace(i)
+	targets = createTargets(n)
 
 	# Create the output file name string
 	if filepath is None:
 		raise Exception("The filepath is 'None'")
 	else:
-		fname = filepath
+		finputs = filepath
 
 	#######################################################################
 	# inputSet will be a 3 x num inputs dictionary as follows
@@ -645,11 +621,11 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 	# END FIRST BIG LOOP
 
 	#*
-	funused = open(fname + "_UnusedLocations", "wb+")
+	funused = open(finputs + "_UnusedLocations", "wb+")
 	pp.pprint(unused_pairs, funused)
 	funused.close()
 
-	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
+	util.writeTrials(inputSet, outSet, finputs, shuffle=shuffle)
 
 def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
@@ -663,42 +639,13 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	space = ips.inputSpace(n)
-	space.createInputs(locations)
-	targets = []
-
-	center = int(round(n / 2))
-
-	#now we have to generate the targets
-	for i in range(locations):
-		coor = space.getCoor(i)
-		dx = (coor[1] - center) / center
-		dy = (coor[0] - center) / center
-
-		# store the deviation from the center in our two x coor variables
-		if dx >= 0:
-			dxPlus = dx
-			dxMinus = 0
-		else:
-			dxPlus = 0
-			dxMinus = abs(dx)
-
-		if dy >= 0:
-			dyPlus = 0
-			dyMinus = dy
-		else:
-			dyPlus = abs(dy)
-			dyMinus = 0
-
-		targets.append([dxPlus, dxMinus, dyPlus, dyMinus])
-		# print targets[-1]
-		# space.printSpace(i)
+	targets = createTargets(n)
 
 	# Create the output file name string
 	if filepath is None:
 		raise Exception("The filepath is 'None'")
 	else:
-		fname = filepath
+		finputs = filepath
 
 	inputSet = []
 
@@ -942,7 +889,7 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 	# END FIRST BIG LOOP
 
 	#*
-	funused = open(fname + "_UnusedLocations_Selection", "wb+")
+	funused = open(finputs + "_UnusedLocations_Selection", "wb+")
 	pp.pprint(unused_pairs, funused)
 	funused.close()
 
@@ -1186,60 +1133,15 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 	# END FIRST BIG LOOP
 
 	#*
-	funused = open(fname + "_UnusedLocations_Attention", "wb+")
+	funused = open(finputs + "_UnusedLocations_Attention", "wb+")
 	pp.pprint(unused_pairs, funused)
 	funused.close()
 
-	util.writeTrial(inputSet, outSet, fname, shuffle=shuffle)
+	util.writeTrials(inputSet, outSet, finputs, shuffle=shuffle)
 
 def main():
 
 	raise Exception("Error: This main method is deprecated for now.")
-
-	default = util.isYes("Use default trial parameters?", "yes")
-
-	if default:
-		n = 11
-		locations = 8
-		selection_time = 3
-		stim_time = 5
-		delay_time = 5
-		output_time = 5
-		rand_input = False
-		rand_delay = False
-		test = True
-		shuffle = True
-		reps = 7
-		fname = None
-	else:
-		fname = raw_input("What should this file be named?\n")
-		test = util.isYes("Is this for testing purposes? (as opposed to training)\n")
-		shuffle = util.isYes("Shuffle the input sequence?\n")
-		n = int(raw_input("What is the side length (n) of the 2D input space? (Odd numbers only)\n"))
-		locations = int(raw_input("How many targets should there be?\n"))
-		selection_time = int(raw_input("How long should the selection time be?\n"))
-		stim_time = int(raw_input("How long should the stimulus presentation be?\n"))
-		delay_time = int(raw_input("How long should the delay period be?\n"))
-		output_time = int(raw_input("How long should the output presentation be?\n"))
-		max_trial = stim_time + delay_time + output_time
-		rand_input = util.isYes("Should there be randomized input periods?\n")
-		if rand_input:
-			input_var = int(raw_input("What is the range of input variability in time steps? (Ex: 2 would mean stimulus +- 2 steps)\n"))
-			max_trial += input_var
-		rand_delay = util.isYes("Should there be randomized delay periods?\n")
-		if rand_delay:
-			delay_var = int(raw_input("What is the range of delay variability in time steps? (Ex: 2 would mean delay +- 2 steps)\n"))
-			max_trial += delay_var
-
-	if rand_delay or rand_input:
-		rand = random.seed()
-		reps = int(raw_input("Finally, what are the number of repetitions of random length?\n"))
-
-	attenGen(n=n, locations=locations, stim_time=stim_time,
-			 delay_time=delay_time, output_time=output_time,
-			 rand_input=rand_input, rand_delay=rand_delay, test=test,
-			 selection_time=selection_time, reps=reps, shuffle=shuffle,
-			 fname=fname)
 
 if __name__ == "__main__":
     main()
