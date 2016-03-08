@@ -44,7 +44,7 @@ def createTargets(numLocs):
 
 	return targets
 
-def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=False, shuffle=True):
+def attenGen(n, locations, phase_times, phase_var, train_pct, ifile, filepath=None, test=False, shuffle=True):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -60,9 +60,11 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=Fal
 
 	# Create the output file name string
 	if filepath is None:
-		raise Exception("The filepath is 'None'")
+		filepath = ifile
+	elif not filepath.endswith('/'):
+		finputs = filepath + '/' + ifile
 	else:
-		finputs = filepath
+		finputs = filepath + ifile
 
 	#######################################################################
 	# inputSet will be a 3 x num inputs dictionary as follows
@@ -75,6 +77,7 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=Fal
 	# [ [inputName], [input] ]
 	#######################################################################
 	inputSet = []
+	unusedInSet = []
 
 	#######################################################################
 	# outSet will be a 2 x num inputs dictionary that looks like this:
@@ -87,6 +90,7 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=Fal
 	# [ [title], [outputN] ]
 	#######################################################################
 	outSet = []
+	unusedOutSet = []
 
 	#*
 	unused_pairs = [x for x in range(locations)]
@@ -327,16 +331,232 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, filepath, test=Fal
 			#*
 			unused_pairs[i][selection].append(unusedLocations)
 
-	# END FIRST BIG LOOP
+			for loc in unusedLocations:
 
-	#*
-	funused = open(finputs + "_UnusedLocations", "wb+")
-	pp.pprint(unused_pairs, funused)
-	funused.close()
+				##############################################
+				# The input for this trial, i
+				# range(i) = selection*repititions*locations
+				input_i = []
 
+				# The output for this trial, i
+				output_i = []
+				##############################################
+
+				trialSet = {}
+
+				out_len = output_time
+				inputGrid = space.getInputGrid(i)
+
+				falseCue = loc
+				falseInputGrid = space.getInputGrid(falseCue)
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'input'
+				title['task'] = 'attention'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				###########################################
+				# first, create the cue presentation
+				###########################################
+				for j in range(selection_time):
+					inputLine = []
+					for k in range(n):
+						for q in range(n):
+							inputLine.append(0)
+					# present fixation point
+					inputLine.append(1)
+					inputLine.append(0)
+					# choose selection target
+					if selection == 0:
+						inputLine.append(1)
+						inputLine.append(0)
+					elif selection == 1:
+						inputLine.append(0)
+						inputLine.append(1)
+					else:
+						raise NameError('Incorrect selection num when generating inputs.')
+					input_i.append(inputLine)
+
+				###################################
+				# now, the first stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				###################################
+				# now, the second stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				# chose not to present the selection param during delay... unsure
+				###################################
+				# the delay period
+				###################################
+				for j in range(delay_time):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				###################################
+				# then nothing during the output phase
+				###################################
+				for j in range(out_len):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				trialSet['inputs'] = input_i
+				unusedInSet.append(trialSet)
+
+				################################################################
+				# Now create the targets
+				################################################################
+				trialSet = {} # reset the trial set
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'output'
+				title['task'] = 'attention'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				####################################
+				# first, the selection presentation
+				####################################
+				for j in range(selection_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then for both stim presentations
+				####################################
+				for j in range(2*stim_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then the delay period
+				####################################
+				for j in range(delay_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# and finally, the correct input stim
+				####################################
+				for j in range(out_len):
+					outputLine = []
+					for k in range(len(targets[i])):
+						outputLine.append(targets[i][k])
+					output_i.append(outputLine)
+
+				trialSet['outputs'] = output_i
+				unusedOutSet.append(trialSet)
+
+	if filepath.endswith("/"):
+		unusedFile = filepath + "Unused_Locs.train"
+	else:
+		unusedFile = filepath + "/" + "Unused_Locs.train"
+
+	util.writeTrials(unusedInSet, unusedOutSet, unusedFile, shuffle=True)
 	util.writeTrials(inputSet, outSet, finputs, shuffle=shuffle)
 
-def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
+def selGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -352,9 +572,11 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 
 	# Create the output file name string
 	if filepath is None:
-		raise Exception("The filepath is 'None'")
+		filepath = ifile
+	elif not filepath.endswith('/'):
+		finputs = filepath + '/' + ifile
 	else:
-		finputs = filepath
+		finputs = filepath + ifile
 
 	#######################################################################
 	# inputSet will be a 3 x num inputs dictionary as follows
@@ -367,6 +589,7 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 	# [ [inputName], [input] ]
 	#######################################################################
 	inputSet = []
+	unusedInSet = []
 
 	#######################################################################
 	# outSet will be a 2 x num inputs dictionary that looks like this:
@@ -379,6 +602,7 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 	# [ [title], [outputN] ]
 	#######################################################################
 	outSet = []
+	unusedOutSet = []
 
 	#*
 	unused_pairs = [x for x in range(locations)]
@@ -618,16 +842,231 @@ def selGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=
 			#*
 			unused_pairs[i][selection].append(unusedLocations)
 
-	# END FIRST BIG LOOP
+			for loc in unusedLocations:
 
-	#*
-	funused = open(finputs + "_UnusedLocations", "wb+")
-	pp.pprint(unused_pairs, funused)
-	funused.close()
+				##############################################
+				# The input for this trial, i
+				# range(i) = selection*repititions*locations
+				input_i = []
 
+				# The output for this trial, i
+				output_i = []
+				##############################################
+
+				trialSet = {}
+
+				out_len = output_time
+				inputGrid = space.getInputGrid(i)
+
+				falseCue = loc
+				falseInputGrid = space.getInputGrid(falseCue)
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'input'
+				title['task'] = 'selection'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				###################################
+				# the first stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				###################################
+				# now, the second stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				###########################################
+				# then, the cue presentation
+				###########################################
+				for j in range(selection_time):
+					inputLine = []
+					for k in range(n):
+						for q in range(n):
+							inputLine.append(0)
+					# present fixation point
+					inputLine.append(1)
+					inputLine.append(0)
+					# choose selection target
+					if selection == 0:
+						inputLine.append(1)
+						inputLine.append(0)
+					elif selection == 1:
+						inputLine.append(0)
+						inputLine.append(1)
+					else:
+						raise NameError('Incorrect selection num when generating inputs.')
+					input_i.append(inputLine)
+
+				###################################
+				# the delay period
+				###################################
+				for j in range(delay_time):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				###################################
+				# then nothing during the output phase
+				###################################
+				for j in range(out_len):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				trialSet['inputs'] = input_i
+				unusedInSet.append(trialSet)
+
+				################################################################
+				# Now create the targets
+				################################################################
+				trialSet = {} # reset the trial set
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'output'
+				title['task'] = 'selection'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				####################################
+				# first for both stim presentations
+				####################################
+				for j in range(2*stim_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then, the cue presentation
+				####################################
+				for j in range(selection_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then the delay period
+				####################################
+				for j in range(delay_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# and finally, the correct input stim
+				####################################
+				for j in range(out_len):
+					outputLine = []
+					for k in range(len(targets[i])):
+						outputLine.append(targets[i][k])
+					output_i.append(outputLine)
+
+				trialSet['outputs'] = output_i
+				unusedOutSet.append(trialSet)
+
+	if filepath.endswith("/"):
+		unusedFile = filepath + "Unused_Locs.train"
+	else:
+		unusedFile = filepath + "/" + "Unused_Locs.train"
+
+	util.writeTrials(unusedInSet, unusedOutSet, unusedFile, shuffle=True)
 	util.writeTrials(inputSet, outSet, finputs, shuffle=shuffle)
 
-def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle=True, filepath=None):
+def combGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, shuffle=True, filepath=None):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
 
 	selection_time = phase_times['cue']
@@ -643,13 +1082,17 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 
 	# Create the output file name string
 	if filepath is None:
-		raise Exception("The filepath is 'None'")
+		filepath = ifile
+	elif not filepath.endswith('/'):
+		finputs = filepath + '/' + ifile
 	else:
-		finputs = filepath
+		finputs = filepath + ifile
 
 	inputSet = []
+	unusedInSet = []
 
 	outSet = []
+	unusedOutSet = []
 
 	#*
 	unused_pairs = [x for x in range(locations)]
@@ -886,12 +1329,221 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 			#*
 			unused_pairs[i][selection].append(unusedLocations)
 
-	# END FIRST BIG LOOP
+			for loc in unusedLocations:
 
-	#*
-	funused = open(finputs + "_UnusedLocations_Selection", "wb+")
-	pp.pprint(unused_pairs, funused)
-	funused.close()
+				##############################################
+				# The input for this trial, i
+				# range(i) = selection*repititions*locations
+				input_i = []
+
+				# The output for this trial, i
+				output_i = []
+				##############################################
+
+				trialSet = {}
+
+				out_len = output_time
+				inputGrid = space.getInputGrid(i)
+
+				falseCue = loc
+				falseInputGrid = space.getInputGrid(falseCue)
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'input'
+				title['task'] = 'selection'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				###################################
+				# the first stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				###################################
+				# now, the second stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				###########################################
+				# then, the cue presentation
+				###########################################
+				for j in range(selection_time):
+					inputLine = []
+					for k in range(n):
+						for q in range(n):
+							inputLine.append(0)
+					# present fixation point
+					inputLine.append(1)
+					inputLine.append(0)
+					# choose selection target
+					if selection == 0:
+						inputLine.append(1)
+						inputLine.append(0)
+					elif selection == 1:
+						inputLine.append(0)
+						inputLine.append(1)
+					else:
+						raise NameError('Incorrect selection num when generating inputs.')
+					input_i.append(inputLine)
+
+				###################################
+				# the delay period
+				###################################
+				for j in range(delay_time):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				###################################
+				# then nothing during the output phase
+				###################################
+				for j in range(out_len):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				trialSet['inputs'] = input_i
+				unusedInSet.append(trialSet)
+
+				################################################################
+				# Now create the targets
+				################################################################
+				trialSet = {} # reset the trial set
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'output'
+				title['task'] = 'selection'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				####################################
+				# first for both stim presentations
+				####################################
+				for j in range(2*stim_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then, the cue presentation
+				####################################
+				for j in range(selection_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then the delay period
+				####################################
+				for j in range(delay_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# and finally, the correct input stim
+				####################################
+				for j in range(out_len):
+					outputLine = []
+					for k in range(len(targets[i])):
+						outputLine.append(targets[i][k])
+					output_i.append(outputLine)
+
+				trialSet['outputs'] = output_i
+				unusedOutSet.append(trialSet)
 
 	#*
 	unused_pairs = [x for x in range(locations)]
@@ -1130,13 +1782,229 @@ def combGen(n, locations, phase_times, phase_var, train_pct, test=False, shuffle
 			#*
 			unused_pairs[i][selection].append(unusedLocations)
 
-	# END FIRST BIG LOOP
+			for loc in unusedLocations:
 
-	#*
-	funused = open(finputs + "_UnusedLocations_Attention", "wb+")
-	pp.pprint(unused_pairs, funused)
-	funused.close()
+				##############################################
+				# The input for this trial, i
+				# range(i) = selection*repititions*locations
+				input_i = []
 
+				# The output for this trial, i
+				output_i = []
+				##############################################
+
+				trialSet = {}
+
+				out_len = output_time
+				inputGrid = space.getInputGrid(i)
+
+				falseCue = loc
+				falseInputGrid = space.getInputGrid(falseCue)
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'input'
+				title['task'] = 'attention'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				###########################################
+				# first, create the cue presentation
+				###########################################
+				for j in range(selection_time):
+					inputLine = []
+					for k in range(n):
+						for q in range(n):
+							inputLine.append(0)
+					# present fixation point
+					inputLine.append(1)
+					inputLine.append(0)
+					# choose selection target
+					if selection == 0:
+						inputLine.append(1)
+						inputLine.append(0)
+					elif selection == 1:
+						inputLine.append(0)
+						inputLine.append(1)
+					else:
+						raise NameError('Incorrect selection num when generating inputs.')
+					input_i.append(inputLine)
+
+				###################################
+				# now, the first stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				###################################
+				# now, the second stim presentation
+				###################################
+				if selection == 0:
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(falseInputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)		
+				else: # selecting the next target
+					for j in range(stim_time):
+						inputLine = []
+						for k in range(n):
+							for q in range(n):
+								inputLine.append(inputGrid[k][q])
+						inputLine.append(1)
+						inputLine.append(0)
+						inputLine.append(0)
+						inputLine.append(0)
+						input_i.append(inputLine)
+
+				# chose not to present the selection param during delay... unsure
+				###################################
+				# the delay period
+				###################################
+				for j in range(delay_time):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				###################################
+				# then nothing during the output phase
+				###################################
+				for j in range(out_len):
+					inputLine = []
+					for k in range(n*n):
+						inputLine.append(0)
+					inputLine.append(0)
+					inputLine.append(1)
+					inputLine.append(0)
+					inputLine.append(0)
+					input_i.append(inputLine)
+
+				trialSet['inputs'] = input_i
+				unusedInSet.append(trialSet)
+
+				################################################################
+				# Now create the targets
+				################################################################
+				trialSet = {} # reset the trial set
+
+				# Crete the label for this trial with all the necessary information
+				title = {}
+				title['type'] = 'output'
+				title['task'] = 'attention'
+				title['inputs'] = {}
+				if (selection == 0):
+					title['inputs']['cue1'] = i
+					title['inputs']['cue2'] = falseCue
+					title['inputs']['choice'] = 1
+				else:
+					title['inputs']['cue1'] = falseCue
+					title['inputs']['cue2'] = i
+					title['inputs']['choice'] = 2
+				title['timing'] = {}
+				title['timing']['selection'] = selection_time
+				title['timing']['cue1'] = stim_time
+				title['timing']['cue2'] = stim_time
+				title['timing']['delay'] = delay_time
+				title['timing']['output'] = out_len
+
+				trialSet['title'] = title
+
+				####################################
+				# first, the selection presentation
+				####################################
+				for j in range(selection_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then for both stim presentations
+				####################################
+				for j in range(2*stim_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# then the delay period
+				####################################
+				for j in range(delay_time):
+					outputLine = []
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					outputLine.append(0)
+					output_i.append(outputLine)
+
+				####################################
+				# and finally, the correct input stim
+				####################################
+				for j in range(out_len):
+					outputLine = []
+					for k in range(len(targets[i])):
+						outputLine.append(targets[i][k])
+					output_i.append(outputLine)
+
+				trialSet['outputs'] = output_i
+				unusedOutSet.append(trialSet)
+
+	if filepath.endswith("/"):
+		unusedFile = filepath + "Unused_Locs.train"
+	else:
+		unusedFile = filepath + "/" + "Unused_Locs.train"
+
+	util.writeTrials(unusedInSet, unusedOutSet, unusedFile, shuffle=True)
 	util.writeTrials(inputSet, outSet, finputs, shuffle=shuffle)
 
 def main():

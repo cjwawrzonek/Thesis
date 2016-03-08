@@ -129,13 +129,16 @@ class experiment:
 			pass # ig.simpleGen()
 		elif self.exp['type'] == "attention":
 			ig.attenGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], self.exp['train_pct'], filepath=trainFilepath)
+						self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
+						ifile=self.exp['train_file'])
 		elif self.exp['type'] == "selection":
 			ig.selGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], self.exp['train_pct'], filepath=trainFilepath)
+						self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
+						ifile=self.exp['train_file'])
 		elif self.exp['type'] == "combined":
 			ig.combGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], self.exp['train_pct'], filepath=trainFilepath)
+						self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
+						ifile=self.exp['train_file'])
 		else:
 			raise Exception("Experiment type not in list: {}".format(self.exp['type']))
 

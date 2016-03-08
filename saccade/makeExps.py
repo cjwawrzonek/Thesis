@@ -2,11 +2,14 @@ import sys
 import os
 
 def makeExps(expType):
-	exp = 1
+	exp = 49
 
+	# for locs in [4, 8, 16]:
+	# 	for pct in [50, 75, 90, 100]:
+	# 		for layer in [16, 25, 64, 144]:
 	for locs in [4, 8, 16]:
-		for pct in [50, 75, 90, 100]:
-			for layer in [16, 25, 64, 144]:
+		for pct in [60, 70, 80, 95]:
+			for layer in [9, 16, 25, 36, 49]:
 				if not os.path.exists("experiments"):
 					os.makedirs("experiments")
 				if not os.path.exists("experiments/{}{}".format(expType, exp)):
