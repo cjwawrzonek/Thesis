@@ -1,5 +1,6 @@
 import sys
 import os
+import experiment as e
 
 def makeExps(expType):
 	exp = 49
@@ -52,6 +53,16 @@ def main():
 		makeExps("combined")
 	else:
 		raise Exception("Usage: python makeExps.py [optional: type]\n\nType: attention / selection / combined")
+
+	for expType in ['selection', 'attention', 'combined']:
+		expNum = 49
+		while os.path.exists("experiments/{}{}".format(expType, expNum)):
+			exp = e.experiment()
+			exp.read("experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum))
+			exp.createTrainSet()
+			print exp
+			expNum += 1
+
 
 if __name__ == "__main__":
 	main()

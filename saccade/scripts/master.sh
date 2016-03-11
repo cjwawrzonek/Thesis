@@ -16,7 +16,7 @@ FILE="attention$i.sh"
 while [ -f $FILE ];
 do
 	chmod +x $FILE;
-	submit attention$i.sh;
+	submit_long attention$i.sh;
 	((i++))
 	FILE="attention$i.sh"
 done
@@ -34,7 +34,7 @@ FILE="selection$i.sh"
 while [ -f $FILE ];
 do
 	chmod +x $FILE;
-	submit selection$i.sh;
+	submit_long selection$i.sh;
 	((i++))
 	FILE="selection$i.sh"
 done
@@ -52,7 +52,7 @@ FILE="combined$i.sh"
 while [ -f $FILE ];
 do
 	chmod +x $FILE;
-	submit combined$i.sh;
+	submit_long combined$i.sh;
 	((i++))
 	FILE="combined$i.sh"
 done

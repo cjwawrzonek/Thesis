@@ -161,7 +161,7 @@ def readW(wFilePath):
 # wFilePath - file with inputs and targets to read
 ####################################################
 def writeW(layers, W, wFilePath):
-    Wfile = open(wFilePath, "r+b")
+    Wfile = open(wFilePath, "wb+")
 
     Wfile.write(str(layers))
     Wfile.write("\n")
@@ -178,7 +178,7 @@ def writeW(layers, W, wFilePath):
 # filePath - file path to write data
 ####################################################
 def writeTrials(inSet, outSet, filePath, shuffle=False):
-    f = open(filePath, "r+b")
+    f = open(filePath, "wb+")
 
     if (len(inSet) != len(outSet)):
         raise NameError("Erorr: Input and Output length are not equal.")

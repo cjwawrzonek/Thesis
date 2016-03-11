@@ -10,12 +10,12 @@ import random
 import utility as util # my standard library
 import pprint as pp
 
-def createTargets(numLocs):
+def createTargets(n, locations):
 	space = ips.inputSpace(n)
 	space.createInputs(locations)
 	targets = []
 
-	center = int(round(numLocs / 2))
+	center = int(round(n / 2))
 
 	#now we have to generate the targets
 	for i in range(locations):
@@ -42,7 +42,7 @@ def createTargets(numLocs):
 		# print targets[-1]
 		# space.printSpace(i)
 
-	return targets
+	return {"targets": targets, "space": space}
 
 def attenGen(n, locations, phase_times, phase_var, train_pct, ifile, filepath=None, test=False, shuffle=True):
 	# phase_var is a dictionary of booleans. If a phase has variable delay, it is true. else false
@@ -56,7 +56,9 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, ifile, filepath=No
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	targets = createTargets(n)
+	ret = createTargets(n, locations)
+	targets = ret['targets']
+	space = ret['space']
 
 	# Create the output file name string
 	if filepath is None:
@@ -547,6 +549,10 @@ def attenGen(n, locations, phase_times, phase_var, train_pct, ifile, filepath=No
 
 				trialSet['outputs'] = output_i
 				unusedOutSet.append(trialSet)
+
+	funused = open(finputs + "_UnusedLocations", "wb+")
+	pp.pprint(unused_pairs, funused)
+	funused.close()
 
 	if filepath.endswith("/"):
 		unusedFile = filepath + "Unused_Locs.train"
@@ -568,7 +574,9 @@ def selGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, s
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	targets = createTargets(n)
+	ret = createTargets(n, locations)
+	targets = ret['targets']
+	space = ret['space']
 
 	# Create the output file name string
 	if filepath is None:
@@ -1058,6 +1066,10 @@ def selGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, s
 				trialSet['outputs'] = output_i
 				unusedOutSet.append(trialSet)
 
+	funused = open(finputs + "_UnusedLocations", "wb+")
+	pp.pprint(unused_pairs, funused)
+	funused.close()
+
 	if filepath.endswith("/"):
 		unusedFile = filepath + "Unused_Locs.train"
 	else:
@@ -1078,7 +1090,9 @@ def combGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, 
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	targets = createTargets(n)
+	ret = createTargets(n, locations)
+	targets = ret['targets']
+	space = ret['space']
 
 	# Create the output file name string
 	if filepath is None:
@@ -1546,6 +1560,10 @@ def combGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, 
 				unusedOutSet.append(trialSet)
 
 	#*
+	funused = open(finputs + "_UnusedSelection", "wb+")
+	pp.pprint(unused_pairs, funused)
+	funused.close()
+
 	unused_pairs = [x for x in range(locations)]
 	for x in range(locations):
 		unused_pairs[x] = [[],[]]
@@ -1998,6 +2016,10 @@ def combGen(n, locations, phase_times, phase_var, train_pct, ifile, test=False, 
 
 				trialSet['outputs'] = output_i
 				unusedOutSet.append(trialSet)
+
+	funused = open(finputs + "_UnusedAttention", "wb+")
+	pp.pprint(unused_pairs, funused)
+	funused.close()
 
 	if filepath.endswith("/"):
 		unusedFile = filepath + "Unused_Locs.train"
