@@ -27,6 +27,7 @@ import sys
 from hessianbackprop import HessianBackprop
 from hessianrnn import HessianRNN
 import utility as util
+import experiment as e
 
 def onclick(event):
     global pause
@@ -44,20 +45,19 @@ fig.canvas.mpl_connect('button_press_event', onclick)
 # wFile - file of weights from training
 # inputFile - file with inputs and targets to test on
 # imageName - name of imageName you wish to name the image, default = "defaultScatter"
-def scatter(dataPath, wFile, inputFile, imageFile=None):
+def scatter(expPath, imageFile=None):
+    exp = e.experiment()
+    exp.read(expPath, W=True)
+
     if imageFile is None:
         imageFile = "defaultScatter.png"
-
-    if not dataPath.endswith('/'):
-        dataPath += '/'
         
-    ret = util.readTrials(dataPath + inputFile)
+    ret = util.readTrials(exp.exp['directory'] + "Unused_Locs.train")
 
     inputs = ret['inputs']
     targets = ret['targets']
 
-    rnn = HessianRNN(layers=[len(inputs[0][0]), 144, len(targets[0][0])], struc_damping=0.5,
-                 use_GPU=False, debug=False, loadW=wFile, dataPath=dataPath)
+    rnn = exp.rnn
 
     np.set_printoptions(edgeitems = 10)
 
@@ -127,6 +127,7 @@ def scatter(dataPath, wFile, inputFile, imageFile=None):
             plt.axhline(linewidth=0.5, color="black")
             plt.axvline(linewidth=0.5, color="black")
             plt.draw()
+            plt.pause(1)
             index += 1
             if index >= len(targets):
                 pylab.savefig(dataPath + imageFile)
@@ -138,6 +139,7 @@ def scatter(dataPath, wFile, inputFile, imageFile=None):
         # plt.show()
 
 def main():
+    scatter(sys.argv[1])
     # random delay training without progressive training
     # scatter("trial_11x11_rand_trial", "W", "TESTInputs_11x11_12_targetsRAND_long.txt")
 
@@ -154,7 +156,7 @@ def main():
     # scatter("select_11x11_8_targets_shuffle_long", "W", "TESTSelection_11x11_8_targetsNoRAND.txt")
 
     # attention taslk, trained on 5 of 7 matches as foils
-    scatter("attention_11x11_8_targets_shuffle", "W_Full", "TESTattention_11x11_8_targets_shuffle.txt")
+    # scatter("attention_11x11_8_targets_shuffle", "W_Full", "TESTattention_11x11_8_targets_shuffle.txt")
 
 if __name__ == "__main__":
     main()

@@ -86,18 +86,19 @@ def main():
     # For test computing the theta error of an experiment
     ####################################################################################
 
-    expPath = "experiments/attention40/attention40.exp"
-    exp = e.experiment()
-    exp.read(expPath, W=True)
-    exp.createTrainSet()
+    # expPath = "experiments/attention24/attention24.exp"
+    # exp = e.experiment()
+    # exp.read(expPath, W=True)
+    # exp.createTrainSet()
 
-    thetas = thetaError(exp)
-    fig = plt.figure()
-    plt.hist(thetas, 45, normed=1, facecolor='green', alpha=0.75)
-    # fig.show()
-    plt.savefig("experiments/attention40/thetas.pdf", format="pdf")
+    # thetas = thetaError(exp)
+    # # fig = plt.figure()
+    # plt.hist(thetas, 45, normed=1, facecolor='green', alpha=0.75)
+    # plt.show(block=True)
+    # # fig.show()
+    # # plt.savefig("experiments/attention40/thetas.pdf", format="pdf")
 
-    exit()
+    # exit()
 
     ####################################################################################
     # For computing the trianing, testing, and theta errors of each experiment
@@ -114,29 +115,27 @@ def main():
                 exp = e.experiment()
                 exp.read(expPath, W=True)
                 if exp.exp['train_pct'] < 100:
-                    testErrors.append(["{}{}".format(expType, expNum), exp.testError()])
+                    # testErrors.append(["{}{}".format(expType, expNum), exp.testError()])
                     fthetas = open("experiments/{}{}/Theta_Errors".format(expType, expNum), "wb+")
                     thetas = thetaError(exp)
                     pprint(thetas, stream=fthetas)
-                    fig = plt.figure()
                     plt.hist(thetas, 45, normed=1, facecolor='green', alpha=0.75)
-                    # fig.show()
-                    plt.savefig("experiments/{}{}/thetas.pdf".format(expType, expNum), format="pdf")
-                    # plt.show(block=True)
-                trainErrors.append(["{}{}".format(expType, expNum), exp.trainError()])
+                    plt.savefig("experiments/{}{}/thetas_clear.pdf".format(expType, expNum), format="pdf")
+                    plt.clf()
+                # trainErrors.append(["{}{}".format(expType, expNum), exp.trainError()])
             except:
                 pass
             expNum += 1
             expPath = "experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum)
             print expPath
 
-    testErrors = sorted(testErrors,key=lambda x: x[1])
-    trainErrors = sorted(trainErrors,key=lambda x: x[1])
+    # testErrors = sorted(testErrors,key=lambda x: x[1])
+    # trainErrors = sorted(trainErrors,key=lambda x: x[1])
 
-    ftrain = open("Train_Errors", "wb+")
-    ftest = open("Test_Errors", "wb+")
-    pprint(testErrors, stream=ftest)
-    pprint(trainErrors, stream=ftrain)
+    # ftrain = open("Train_Errors", "wb+")
+    # ftest = open("Test_Errors", "wb+")
+    # pprint(testErrors, stream=ftest)
+    # pprint(trainErrors, stream=ftrain)
 
 if __name__ == "__main__":
     main()

@@ -52,7 +52,7 @@ def anova(dataPath, wFile, inputFile, imageFile=None):
 
     ##########################################################
     # must find way to generalize this value
-    numLocations = 8
+    numLocations = 16
     pval = 0.05
     ##########################################################
 
@@ -107,6 +107,8 @@ def anova(dataPath, wFile, inputFile, imageFile=None):
         loc2 = info['inputs']['cue2']
         choice = info['inputs']['choice'] - 1
 
+        # print loc1
+        # print len(locTrials)
         locTrials[loc1].append(trial)
         locTrials[loc2].append(trial)
         choices[choice].append(trial)
@@ -437,7 +439,7 @@ def anova(dataPath, wFile, inputFile, imageFile=None):
 
 def main():
     # attention task
-    anova("attention_11x11_8_targets_shuffle", "W_Full", "TESTattention_11x11_8_targets_shuffle.txt")
+    anova("experiments/attention44", "W", "attention44.train")
 
 if __name__ == "__main__":
     main()

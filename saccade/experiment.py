@@ -184,13 +184,19 @@ class experiment:
 	def test(self, W=None):
 		raise Exception("Function not implemented yet")
 
-	def trainError(self):
-		"""Compute RMS error."""
+	def testError(self):
+		"""Compute RMS error of the testing set"""
 
-		if self.exp['directory'] == None or self.exp['directory'] == '':
-			trainFilepath = self.exp['train_file']
-		else:
-			trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
+		testFilepath = "{}{}".format(self.exp['directory'], "Unused_Locs.train")
+
+		ret = util.readTrials(testFilepath)
+
+		return self.rnn.error(inputs=ret['inputs'], targets=ret['targets'])
+
+	def trainError(self):
+		"""Compute RMS error of the training set"""
+
+		trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
 
 		ret = util.readTrials(trainFilepath)
 
