@@ -49,8 +49,8 @@ def anova(expPath, imageFile=None):
     if imageFile is None:
         imageFile = "anova.png"
         
-    ret = util.readTrials(exp.exp['directory'] + exp.exp['train_file'])
-    # ret = util.readTrials(exp.exp['directory'] + "Unused_Locs.train")
+    ret = exp.getTrainInputs()
+    # ret = exp.getTestInputs()
 
     ##########################################################
     # must find way to generalize this value

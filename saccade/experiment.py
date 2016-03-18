@@ -142,6 +142,12 @@ class experiment:
 		else:
 			raise Exception("Experiment type not in list: {}".format(self.exp['type']))
 
+	def getTrainInputs(self):
+		return util.readTrials(self.exp['directory'] + self.exp['train_file'])
+
+	def getTestInputs(self):
+		return util.readTrials(self.exp['directory'] + "Unused_Locs.train")
+
 	def train(self, loadW=False):
 		if loadW == True:
 			loadW = "{}W".format(self.exp['directory'])
