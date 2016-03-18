@@ -139,7 +139,8 @@ def scatter(expPath, imageFile=None):
         # plt.show()
 
 def main():
-    scatter(sys.argv[1])
+    # scatter(sys.argv[1])
+    scatter("experiments/selection106/selection106.exp")
     # random delay training without progressive training
     # scatter("trial_11x11_rand_trial", "W", "TESTInputs_11x11_12_targetsRAND_long.txt")
 
