@@ -286,7 +286,6 @@ def main():
 	e = experiment()
 	e.read(expPath)
 
-	e
 	print e
 
 	e.createTrainSet()

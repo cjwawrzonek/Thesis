@@ -1,16 +1,17 @@
 ## combined Experiment
-description	combined experiment
-directory	experiments/combined8
-type		combined
+description		combined experiment
+name			combined8
+directory		experiments/combined8
+type			combined
 total_length	18
-phase_times	{"delay":5,"output":5,"cue":3,"locs":5}
-num_locs	4
-input_side	11
-hidden_layer	144
-out_layer	4
+phase_times		{"delay":5,"output":5,"cue":3,"locs":5}
+num_locs		8
+input_side		17
+hidden_layer	16
+out_layer		4
 init_weights	init_weights
 train_shuffle	true
-loc_connect	false
-phase_var	{"delay":false,"cue":false,"locs":false}
-variance	2
-train_pct	75
+loc_connect		false
+phase_var		{"delay":false,"cue":false,"locs":false}
+variance		2
+train_pct		90

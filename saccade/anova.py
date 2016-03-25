@@ -41,13 +41,10 @@ def onclick(event):
 # argumetns:
 # wFile - file of weights from training
 # inputFile - file with inputs and targets to test on
-# imageName - name of imageName you wish to name the image, default = "anova+label.png"
-def anova(expPath, imageFile=None):
+# imageName - name of imageName you wish to name the image, default = "anova.png"
+def anova(expPath, imageFile="anova.png"):
     exp = e.experiment()
     exp.read(expPath, W=True)
-
-    if imageFile is None:
-        imageFile = "anova.png"
         
     ret = exp.getTrainInputs()
     # ret = exp.getTestInputs()
@@ -55,6 +52,7 @@ def anova(expPath, imageFile=None):
     ##########################################################
     # must find way to generalize this value
     numLocations = exp.exp['num_locs']
+    global pval
     pval = 0.01
     ##########################################################
 
@@ -188,6 +186,8 @@ def anova(expPath, imageFile=None):
     # want to see.
     #####################################################################
 
+    # trialMeans = trialMeansDelayOnly
+
     conjugateTest(numLocations, trialMeans, locTrials, conjTrials)
     # cueDiffTest(numLocations, trialMeans, cue1locTrials, cue2locTrials, choices)
     # firingRateGraphs(numLocations, trialMeans, locTrials, sigNeurons, choices)
@@ -196,8 +196,6 @@ def conjugateTest(numLocations, trialMeans, locTrials, conjTrials):
     ##########################################################
     # 2d F-stat plots
     ##########################################################
-
-    # trialMeans = trialMeansDelayOnly
 
     # featFs = [list([]) for _ in range(len(trialMeans[0]))]
     # conjFs = [list([]) for _ in range(len(trialMeans[0]))]
@@ -239,11 +237,10 @@ def conjugateTest(numLocations, trialMeans, locTrials, conjTrials):
 
         ans2 = f_oneway(*conj)
 
-        # includes pvalue cutoffs
-        # if ans1.pvalue < pval and ans2.pvalue < pval and ans3.pvalue < pval:
-        #     cue1Fs.append(ans1.statistic)
-        #     cue2Fs.append(ans2.statistic)
-        #     cueDiffFs.append(ans3.statistic)
+        # # includes pvalue cutoffs
+        # if ans1.pvalue < pval and ans2.pvalue < pval:
+        #     featFs.append(ans1.statistic)
+        #     conjFs.append(ans2.statistic)
 
         # without pvalue cutoffs
         featFs.append(ans1.statistic)
@@ -262,43 +259,22 @@ def conjugateTest(numLocations, trialMeans, locTrials, conjTrials):
             pvalClass.append(4)
 
     ################### z-score the fstats ##################
-    featFs.remove(max(featFs))
-    featFs.remove(min(featFs))
+    # featFs.remove(max(featFs))
+    # featFs.remove(min(featFs))
     # cue1Fs.remove(max(cue1Fs))
     # cue1Fs.remove(min(cue1Fs))
 
-    conjFs.remove(max(conjFs))
-    conjFs.remove(min(conjFs))
+    # conjFs.remove(max(conjFs))
+    # conjFs.remove(min(conjFs))
     # cue2Fs.remove(max(cue2Fs))
     # cue2Fs.remove(min(cue2Fs))
     
     featFs = util.zscore(featFs)
+    # featFs = [featFs[i] for i in sigNeurons]
     conjFs = util.zscore(conjFs)
+    # conjFs = [conjFs[i] for i in sigNeurons]
 
-   ######### Now, do a 2d scatterplot for the 2 groups ############
-
-    # markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'b'},
-    #                3: {'m': '^', 'c': 'y'}, 4: {'m': '^', 'c': 'r'}}
-    markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'k'},
-                   3: {'m': '^', 'c': 'r'}, 4: {'m': '^', 'c': 'r'}}
-
-    fig2d = plt.figure()
-    ax = fig2d.add_subplot(111)
-    
-    for neuron in range(len(featFs)):
-        xp = featFs[neuron]
-        yp = conjFs[neuron]
-        ax.scatter(xp, yp, 
-                   marker=markerTypes[pvalClass[neuron]]['m'],
-                   c=markerTypes[pvalClass[neuron]]['c'],
-                   s=40)
-
-    ax.set_xlabel('Feature Selectivity')
-    ax.set_ylabel('Conjunctive Selectivity')
-
-    ax.set_xlim(1.2*min(featFs), 1.2*max(featFs))
-    ax.set_ylim(1.2*min(conjFs), 1.2*max(conjFs))
-    plt.show(block=True)
+    plot2dAnova(featFs, conjFs, 'Feature Selectivity', 'Conjunctive Selectivity', pvalClass)
 
 def cueDiffTest(numLocations, trialMeans, cue1locTrials, cue2locTrials, choices):
     ##########################################################
@@ -402,45 +378,11 @@ def cueDiffTest(numLocations, trialMeans, cue1locTrials, cue2locTrials, choices)
     # cueDiffFs.remove(min(cueDiffFs))
     
     cue1Fs = util.zscore(cue1Fs)
-    
     cue2Fs = util.zscore(cue2Fs)
-
     cueDiffFs = util.zscore(cueDiffFs)
 
-    ######### Now, do a 3d scatterplot for the 3 groups ############
-
-    # markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'b'},
-    #                3: {'m': '^', 'c': 'y'}, 4: {'m': '^', 'c': 'r'}}
-    markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'k'},
-                   3: {'m': '^', 'c': 'r'}, 4: {'m': '^', 'c': 'r'}}
-
-    fig3d = plt.figure()
-    ax = fig3d.add_subplot(111, projection='3d')
-    
-    for neuron in range(len(cue1Fs)):
-        xp = cue1Fs[neuron]
-        yp = cue2Fs[neuron]
-        zp = cueDiffFs[neuron]
-        ax.scatter(xp, yp, zp, 
-                   marker=markerTypes[pvalClass[neuron]]['m'],
-                   c=markerTypes[pvalClass[neuron]]['c'],
-                   s=40)
-
-    ax.set_xlabel('Cue 1 F-Stat')
-    ax.set_ylabel('Cue 2 F-Stat')
-    ax.set_zlabel('Cue Pref F-Stat')
-
-    ax.set_xlim(1.2*min(cue1Fs), 1.2*max(cue1Fs))
-    ax.set_ylim(1.2*min(cue2Fs), 1.2*max(cue2Fs))
-    ax.set_zlim(1.2*min(cueDiffFs), 1.2*max(cueDiffFs))
-    plt.show(block=True)
-    # plt.pause(100)
-
-    # return
-
-        # if ans.pvalue < pval:
-        #     numSigLoc[loc] += 1
-        #     sigNeurons.append(neuron)
+    plot3dAnova(cue1Fs, cue2Fs, cueDiffFs, 'Cue 1 F-Stat', 'Cue 2 F-Stat',
+                'Cue Pref F-Stat', pvalClass)
 
 def firingRateGraphs(numLocations, trialMeans, locTrials, sigNeurons, choices):
     ##########################################################
@@ -491,11 +433,6 @@ def firingRateGraphs(numLocations, trialMeans, locTrials, sigNeurons, choices):
             xvals = np.arange(numLocations)
             # bar1 = ax.bar(xvals, locActs, color="k")
             plt.bar(xvals, locActs, color="k")
-            # add some text for labels, title and axes ticks
-            # ax.set_ylabel("Mean Firing Rate")
-            # ax.set_title('Neuron: {}'.format(neuron))
-            # ax.set_xticks(xvals + width)
-            # ax.set_xticklabels((str(x) for x in range(numLocations)))
             plt.ylabel("Mean Firing Rate")
             plt.title('Neuron: {}'.format(neuron))
             plt.xticks(xvals + width)
@@ -514,11 +451,6 @@ def firingRateGraphs(numLocations, trialMeans, locTrials, sigNeurons, choices):
             yvals = np.arange(2)
             # bar1 = ax.bar(xvals, locActs, color="k")
             plt.bar(yvals, choiceActs, color="k")
-            # add some text for labels, title and axes ticks
-            # ax.set_ylabel("Mean Firing Rate")
-            # ax.set_title('Neuron: {}'.format(neuron))
-            # ax.set_xticks(xvals + width)
-            # ax.set_xticklabels((str(x) for x in range(numLocations)))
             plt.ylabel("Mean Firing Rate")
             plt.title('Neuron: {}'.format(neuron))
             plt.xticks(yvals + width)
@@ -532,9 +464,73 @@ def firingRateGraphs(numLocations, trialMeans, locTrials, sigNeurons, choices):
 
         fig.canvas.get_tk_widget().update() # process events
 
+def plot2dAnova(x, y, x_lab, y_lab, markerClass=None):
+    ######### 2d scatterplot for the 2 groups ############
+
+    # markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'b'},
+    #                3: {'m': '^', 'c': 'y'}, 4: {'m': '^', 'c': 'r'}}
+    markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'k'},
+                   3: {'m': '^', 'c': 'r'}, 4: {'m': '^', 'c': 'r'}}
+
+    fig2d = plt.figure()
+    ax = fig2d.add_subplot(111)
+    
+    for neuron in range(len(x)):
+        xp = x[neuron]
+        yp = y[neuron]
+        if markerClass is not None:
+            marker = markerClass[neuron]
+        else:
+            marker = 1
+        ax.scatter(xp, yp, 
+                   marker=markerTypes[marker]['m'],
+                   c=markerTypes[marker]['c'],
+                   s=40)
+
+    ax.set_xlabel(x_lab)
+    ax.set_ylabel(y_lab)
+
+    ax.set_xlim(1.2*min(x), 1.2*max(x))
+    ax.set_ylim(1.2*min(y), 1.2*max(y))
+    plt.show(block=True)
+
+def plot3dAnova(x, y, z, x_lab, y_lab, z_lab, markerClass=None):
+    ######### Now, do a 3d scatterplot for the 3 groups ############
+
+    # markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'b'},
+    #                3: {'m': '^', 'c': 'y'}, 4: {'m': '^', 'c': 'r'}}
+    markerTypes = {1: {'m': '^', 'c': 'k'}, 2: {'m': '^', 'c': 'k'},
+                   3: {'m': '^', 'c': 'r'}, 4: {'m': '^', 'c': 'r'}}
+
+    fig3d = plt.figure()
+    ax = fig3d.add_subplot(111, projection='3d')
+    
+    for neuron in range(len(x)):
+        xp = x[neuron]
+        yp = y[neuron]
+        zp = z[neuron]
+        if markerClass is not None:
+            marker = markerClass[neuron]
+        else:
+            marker = 1
+        ax.scatter(xp, yp, zp, 
+                   marker=markerTypes[marker]['m'],
+                   c=markerTypes[marker]['c'],
+                   s=40)
+
+    ax.set_xlabel(x_lab)
+    ax.set_ylabel(y_lab)
+    ax.set_zlabel(z_lab)
+
+    ax.set_xlim(1.2*min(x), 1.2*max(x))
+    ax.set_ylim(1.2*min(y), 1.2*max(y))
+    ax.set_zlim(1.2*min(z), 1.2*max(z))
+    plt.show(block=True)
+
 def main():
-    anova("experiments/selection106/selection106.exp")
-    # anova("experiments/combined108/combined108.exp")
+    # anova("experiments/selection106/selection106.exp")
+    anova("experiments/combined108/combined108.exp")
+    # anova("experiments/attention108/attention108.exp")
 
     # did NOT generalize the task
     # anova("experiments/attention58/attention58.exp")

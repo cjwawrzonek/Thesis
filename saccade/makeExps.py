@@ -3,14 +3,14 @@ import os
 import experiment as e
 
 def makeExps(expType):
-	exp = 49
+	exp = 1
 
 	# for locs in [4, 8, 16]:
 	# 	for pct in [50, 75, 90, 100]:
 	# 		for layer in [16, 25, 64, 144]:
-	for locs in [4, 8, 16]:
-		for pct in [60, 70, 80, 95]:
-			for layer in [9, 16, 25, 36, 49]:
+	for locs in [8, 16, 20, 24]:
+		for pct in [85, 90, 92, 95]:
+			for layer in [9, 16, 25, 36, 49, 64]:
 				if not os.path.exists("experiments"):
 					os.makedirs("experiments")
 				if not os.path.exists("experiments/{}{}".format(expType, exp)):
@@ -19,22 +19,22 @@ def makeExps(expType):
 				f = open(fpath, "wb+")
 
 				f.write('''## {} Experiment
-description	{} experiment
-name		{}{}
-directory	experiments/{}{}
-type		{}
+description		{} experiment
+name			{}{}
+directory		experiments/{}{}
+type			{}
 total_length	18
-phase_times	{{"delay":5,"output":5,"cue":3,"locs":5}}
-num_locs	{}
-input_side	11
+phase_times		{{"delay":5,"output":5,"cue":3,"locs":5}}
+num_locs		{}
+input_side		17
 hidden_layer	{}
-out_layer	4
+out_layer		4
 init_weights	init_weights
 train_shuffle	true
-loc_connect	false
-phase_var	{{"delay":false,"cue":false,"locs":false}}
-variance	2
-train_pct	{}'''.format(expType, expType, expType, exp, expType, exp, expType, locs, layer, pct))
+loc_connect		false
+phase_var		{{"delay":false,"cue":false,"locs":false}}
+variance		2
+train_pct		{}'''.format(expType, expType, expType, exp, expType, exp, expType, locs, layer, pct))
 				f.close()
 				exp += 1
 
@@ -59,7 +59,6 @@ def main():
 		while os.path.exists("experiments/{}{}".format(expType, expNum)):
 			exp = e.experiment()
 			exp.read("experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum))
-			exp.createTrainSet()
 			print exp
 			expNum += 1
 
