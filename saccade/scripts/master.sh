@@ -11,7 +11,7 @@ rm -f *.sh.o*
 # attention experiments
 #######################################################
 
-((i=1))
+((i=100))
 FILE="attention$i.sh"
 while [ -f $FILE ];
 do
@@ -29,7 +29,7 @@ echo ""
 # selection experiments
 #######################################################
 
-((i=1))
+((i=100))
 FILE="selection$i.sh"
 while [ -f $FILE ];
 do
@@ -47,7 +47,7 @@ echo ""
 # combined experiments
 #######################################################
 
-((i=1))
+((i=100))
 FILE="combined$i.sh"
 while [ -f $FILE ];
 do

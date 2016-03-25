@@ -2,7 +2,7 @@ import sys
 import os
 
 def makeScripts(expType):
-	exp = 1
+	exp = 100
 
 	while os.path.exists("experiments/{}{}".format(expType, exp)):
 		f = open("scripts/{}{}.sh".format(expType, exp), "wb+")

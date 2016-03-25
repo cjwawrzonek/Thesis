@@ -3,13 +3,10 @@ import os
 import experiment as e
 
 def makeExps(expType):
-	exp = 1
+	exp = 100
 
-	# for locs in [4, 8, 16]:
-	# 	for pct in [50, 75, 90, 100]:
-	# 		for layer in [16, 25, 64, 144]:
-	for locs in [8, 16, 20, 24]:
-		for pct in [85, 90, 92, 95]:
+	for locs in [16, 24, 32]:
+		for pct in [80, 85, 90, 95]:
 			for layer in [9, 16, 25, 36, 49, 64]:
 				if not os.path.exists("experiments"):
 					os.makedirs("experiments")
@@ -26,7 +23,7 @@ type			{}
 total_length	18
 phase_times		{{"delay":5,"output":5,"cue":3,"locs":5}}
 num_locs		{}
-input_side		17
+input_side		15
 hidden_layer	{}
 out_layer		4
 init_weights	init_weights
