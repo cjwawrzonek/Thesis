@@ -2,17 +2,21 @@ import sys
 import os
 
 def makeScripts(expType):
-	exp = 49
+	exp = 1
 
 	while os.path.exists("experiments/{}{}".format(expType, exp)):
 		f = open("scripts/{}{}.sh".format(expType, exp), "wb+")
+		expName = "{}{}".format(expType, exp)
 		fstring = '''#!/bin/bash
 # ------------------------------------------------------------------
 # [Author] Title
 #          Description
 # ------------------------------------------------------------------
 cd ..
-python experiment.py {}{} experiments/{}{}'''.format(expType, exp, expType, exp)
+FPATH="experiments/{}/{}.exp"
+if [ -f $FPATH ]; then
+	python experiment.py {} experiments/{}
+fi'''.format(expName, expName, expName, expName)
 		f.write(fstring)
 		f.close()
 		exp += 1

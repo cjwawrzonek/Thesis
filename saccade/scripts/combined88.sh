@@ -4,4 +4,7 @@
 #          Description
 # ------------------------------------------------------------------
 cd ..
-python experiment.py combined88 experiments/combined88
+FPATH="experiments/combined88/combined88.exp"
+if [ -f $FPATH ]; then
+	python experiment.py combined88 experiments/combined88
+fi
