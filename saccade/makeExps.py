@@ -3,11 +3,11 @@ import os
 import experiment as e
 
 def makeExps(expType):
-	exp = 100
+	exp = 97
 
-	for locs in [16, 24, 32]:
-		for pct in [80, 85, 90, 95]:
-			for layer in [9, 16, 25, 36, 49, 64]:
+	for locs in [32]:
+		for pct in [92]:
+			for layer in [16, 25, 36, 49]:
 				if not os.path.exists("experiments"):
 					os.makedirs("experiments")
 				if not os.path.exists("experiments/{}{}".format(expType, exp)):
@@ -51,13 +51,13 @@ def main():
 	else:
 		raise Exception("Usage: python makeExps.py [optional: type]\n\nType: attention / selection / combined")
 
-	for expType in ['selection', 'attention', 'combined']:
-		expNum = 49
-		while os.path.exists("experiments/{}{}".format(expType, expNum)):
-			exp = e.experiment()
-			exp.read("experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum))
-			print exp
-			expNum += 1
+	# for expType in ['selection', 'attention', 'combined']:
+	# 	expNum = 49
+	# 	while os.path.exists("experiments/{}{}".format(expType, expNum)):
+	# 		exp = e.experiment()
+	# 		exp.read("experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum))
+	# 		print exp
+	# 		expNum += 1
 
 
 if __name__ == "__main__":

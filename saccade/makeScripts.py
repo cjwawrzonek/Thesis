@@ -2,9 +2,11 @@ import sys
 import os
 
 def makeScripts(expType):
-	exp = 100
+	exp = 97
 
 	while os.path.exists("experiments/{}{}".format(expType, exp)):
+		if exp >= 100:
+			break
 		f = open("scripts/{}{}.sh".format(expType, exp), "wb+")
 		expName = "{}{}".format(expType, exp)
 		fstring = '''#!/bin/bash
