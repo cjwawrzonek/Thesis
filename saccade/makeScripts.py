@@ -2,20 +2,20 @@ import sys
 import os
 
 def makeScripts(expRoot):
-	exp = 1
 
 	if not os.path.exists("{}".format(expRoot)):
 		raise Exception("No experiment directory root named: {}".format(expRoot))
-	if not os.path.exists("{}/scripts".format("expRoot")):
-		os.makedirs("{}/scripts".format("expRoot"))
+	if not os.path.exists("{}/scripts".format(expRoot)):
+		os.makedirs("{}/scripts".format(expRoot))
 	for expType in ['selection', 'attention', 'combined']:
-		while os.path.exists("{}/{}{}".format(expRoot, expType, exp)):
-			f = open("{}/scripts/{}{}.sh".format(expRoot, expType, exp), "wb+")
-			expName = "{}{}".format(expType, exp)
+		expNum = 1
+		expName = "{}{}".format(expType, expNum)
+		while os.path.exists("{}/{}".format(expRoot, expName)):
+			f = open("{}/scripts/{}.sh".format(expRoot, expName), "wb+")
 			fstring = '''#!/bin/bash
 # ------------------------------------------------------------------
-# [Author] Title
-#          Description
+# [CJ Wawrzonek] Title
+#          Script to submit experiment
 # ------------------------------------------------------------------
 cd ../..
 FPATH="{}/{}/{}.exp"
@@ -24,10 +24,11 @@ if [ -f $FPATH ]; then
 fi'''.format(expRoot, expName, expName, expName, expRoot, expName)
 			f.write(fstring)
 			f.close()
-			exp += 1
+			expNum += 1
+			expName = "{}{}".format(expType, expNum)
 
 	# Now make the master script
-	f = open("{}/scripts/master.sh", "wb+")
+	f = open("{}/scripts/master.sh".format(expRoot), "wb+")
 	fstring = '''#!/bin/bash
 # ------------------------------------------------------------------
 # [CJ Wawrzonek] master.sh
@@ -92,14 +93,14 @@ echo "$FILE was the final combined script submitted"
 echo ""'''
 	f.write(fstring)
 	f.close()
-	
+
 
 def main():
 	if len(sys.argv) < 2:
 		raise Exception("Please specify a root directory to find your experiments:\n"
 			"Usage: python makeScripts [exps directory]")
 	else:
-		makeExps(sys.argv[1])
+		makeScripts(sys.argv[1])
 
 if __name__ == "__main__":
 	main()

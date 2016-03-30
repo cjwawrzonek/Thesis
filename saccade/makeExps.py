@@ -3,18 +3,18 @@ import os
 import experiment as e
 
 def makeExps(expRoot):
-	exp = 97
 
-	for expType in ['selection, attention, combined']:
+	for expType in ['selection', 'attention', 'combined']:
+		expNum = 1
 		for locs in [8, 16, 20, 24, 32]:
 			for pct in [80, 85, 87, 90, 92, 95]:
 				for layer in [9, 16, 25, 36, 49]:
-					for input_side in [15, 17]
+					for input_side in [15, 17]:
 						if not os.path.exists("{}".format(expRoot)):
 							os.makedirs("{}".format(expRoot))
-						if not os.path.exists("{}/{}{}".format(expRoot, expType, exp)):
-							os.makedirs("{}/{}{}".format(expRoot, expType, exp))
-						fpath = "{}/{}{}/{}{}.exp".format(expRoot, expType, exp, expType, exp)
+						if not os.path.exists("{}/{}{}".format(expRoot, expType, expNum)):
+							os.makedirs("{}/{}{}".format(expRoot, expType, expNum))
+						fpath = "{}/{}{}/{}{}.exp".format(expRoot, expType, expNum, expType, expNum)
 						f = open(fpath, "wb+")
 
 						f.write('''## {} Experiment
@@ -33,10 +33,10 @@ train_shuffle	true
 loc_connect		false
 phase_var		{{"delay":false,"cue":false,"locs":false}}
 variance		2
-train_pct		{}'''.format(expType, expType, expType, exp, expRoot, expType, exp,
+train_pct		{}'''.format(expType, expType, expType, expNum, expRoot, expType, expNum,
 							 expType, locs, input_side, layer, pct))
 						f.close()
-						exp += 1
+						expNum += 1
 
 
 def main():
