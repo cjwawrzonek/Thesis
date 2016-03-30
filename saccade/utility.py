@@ -6,7 +6,6 @@ import copy
 import pickle
 import random
 import math
-import statistics as stat
 
 import numpy as np
 from pprint import pprint

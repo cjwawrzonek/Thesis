@@ -1,43 +1,105 @@
 import sys
 import os
 
-def makeScripts(expType):
-	exp = 97
+def makeScripts(expRoot):
+	exp = 1
 
-	while os.path.exists("experiments/{}{}".format(expType, exp)):
-		if exp >= 100:
-			break
-		f = open("scripts/{}{}.sh".format(expType, exp), "wb+")
-		expName = "{}{}".format(expType, exp)
-		fstring = '''#!/bin/bash
+	if not os.path.exists("{}".format(expRoot)):
+		raise Exception("No experiment directory root named: {}".format(expRoot))
+	if not os.path.exists("{}/scripts".format("expRoot")):
+		os.makedirs("{}/scripts".format("expRoot"))
+	for expType in ['selection', 'attention', 'combined']:
+		while os.path.exists("{}/{}{}".format(expRoot, expType, exp)):
+			f = open("{}/scripts/{}{}.sh".format(expRoot, expType, exp), "wb+")
+			expName = "{}{}".format(expType, exp)
+			fstring = '''#!/bin/bash
 # ------------------------------------------------------------------
 # [Author] Title
 #          Description
 # ------------------------------------------------------------------
-cd ..
-FPATH="experiments/{}/{}.exp"
+cd ../..
+FPATH="{}/{}/{}.exp"
 if [ -f $FPATH ]; then
-	python experiment.py {} experiments/{}
-fi'''.format(expName, expName, expName, expName)
-		f.write(fstring)
-		f.close()
-		exp += 1
+	python experiment.py {} {}/{}
+fi'''.format(expRoot, expName, expName, expName, expRoot, expName)
+			f.write(fstring)
+			f.close()
+			exp += 1
+
+	# Now make the master script
+	f = open("{}/scripts/master.sh", "wb+")
+	fstring = '''#!/bin/bash
+# ------------------------------------------------------------------
+# [CJ Wawrzonek] master.sh
+#          Script for submitting batch experiment runs
+# ------------------------------------------------------------------
+
+# remove outputs from old training runs
+rm -f *.sh.o*
+
+#######################################################
+# attention experiments
+#######################################################
+
+((i=1))
+FILE="attention$i.sh"
+while [ -f $FILE ];
+do
+	chmod +x $FILE;
+	submit_long attention$i.sh;
+	((i++))
+	FILE="attention$i.sh"
+done
+((i=i-1))
+FILE="attention$i.sh"
+echo "$FILE was the final attention script submitted"
+echo ""
+
+#######################################################
+# selection experiments
+#######################################################
+
+((i=1))
+FILE="selection$i.sh"
+while [ -f $FILE ];
+do
+	chmod +x $FILE;
+	submit_long selection$i.sh;
+	((i++))
+	FILE="selection$i.sh"
+done
+((i=i-1))
+FILE="selection$i.sh"
+echo "$FILE was the final selection script submitted"
+echo ""
+
+#######################################################
+# combined experiments
+#######################################################
+
+((i=1))
+FILE="combined$i.sh"
+while [ -f $FILE ];
+do
+	chmod +x $FILE;
+	submit_long combined$i.sh;
+	((i++))
+	FILE="combined$i.sh"
+done
+((i=i-1))
+FILE="combined$i.sh"
+echo "$FILE was the final combined script submitted"
+echo ""'''
+	f.write(fstring)
+	f.close()
+	
 
 def main():
 	if len(sys.argv) < 2:
-		raise Exception("Usage: python makeScripts.py [type]\n\nType: attention / selection / combined / all")
-	if sys.argv[1] == "attention":
-		makeScripts("attention")
-	elif sys.argv[1] == "selection":
-		makeScripts("selection")
-	elif sys.argv[1] == "combined":
-		makeScripts("combined")
-	elif sys.argv[1] == "all":
-		makeScripts("combined")
-		makeScripts("attention")
-		makeScripts("selection")
+		raise Exception("Please specify a root directory to find your experiments:\n"
+			"Usage: python makeScripts [exps directory]")
 	else:
-		raise Exception("Usage: python makeScripts.py [type]\n\nType: attention / selection / combined / all")
+		makeExps(sys.argv[1])
 
 if __name__ == "__main__":
 	main()
