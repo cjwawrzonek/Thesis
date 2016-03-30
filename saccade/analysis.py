@@ -1,15 +1,15 @@
 import random
 import math
 import os
+import sys
+import matplotlib
 
 import numpy as np
 from pprint import pprint
-import sys
 from hessianbackprop import HessianBackprop
 from hessianrnn import HessianRNN
 import utility as util
 import experiment as e
-import matplotlib
 # import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 
@@ -81,6 +81,7 @@ def thetaError(exp):
 
 def main():
     matplotlib.interactive(True)
+    expRoot = "experiments"
 
     ####################################################################################
     # For test computing the theta error of an experiment
@@ -108,7 +109,7 @@ def main():
 
     for expType in ['attention', 'selection', 'combined']:
         expNum = 1
-        expPath = "experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum)
+        expPath = "{}/{}{}/{}{}.exp".format(expRoot, expType, expNum, expType, expNum)
 
         while (os.path.exists(expPath)):
             try:
@@ -116,17 +117,17 @@ def main():
                 exp.read(expPath, W=True)
                 if exp.exp['train_pct'] < 100:
                     # testErrors.append(["{}{}".format(expType, expNum), exp.testError()])
-                    fthetas = open("experiments/{}{}/Theta_Errors".format(expType, expNum), "wb+")
+                    fthetas = open("{}/{}{}/Theta_Errors".format(expRoot, expType, expNum), "wb+")
                     thetas = thetaError(exp)
                     pprint(thetas, stream=fthetas)
                     plt.hist(thetas, 45, normed=1, facecolor='green', alpha=0.75)
-                    plt.savefig("experiments/{}{}/thetas_clear.pdf".format(expType, expNum), format="pdf")
+                    plt.savefig("{}/{}{}/thetas_clear.pdf".format(expRoot, expType, expNum), format="pdf")
                     plt.clf()
                 # trainErrors.append(["{}{}".format(expType, expNum), exp.trainError()])
             except:
                 pass
             expNum += 1
-            expPath = "experiments/{}{}/{}{}.exp".format(expType, expNum, expType, expNum)
+            expPath = "{}/{}{}/{}{}.exp".format(expRoot, expType, expNum, expType, expNum)
             print expPath
 
     # testErrors = sorted(testErrors,key=lambda x: x[1])
