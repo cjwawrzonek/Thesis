@@ -18,6 +18,7 @@ import math
 import sys
 import json
 import inputGen as ig
+import inputGenV2 as igV2
 import utility as util
 from hessianbackprop import HessianBackprop
 from hessianrnn import HessianRNN
@@ -107,7 +108,11 @@ class experiment:
 		if not 'train_file' in self.exp:
 			self.exp['train_file'] = "{}.train".format(self.exp['name'])
 
-		self.exp['input_layer'] = self.exp['input_side']*self.exp['input_side'] + 4
+		if not "version" in self.exp:
+			self.exp['input_layer'] = self.exp["num_locs"] + 4
+		else:
+			self.exp["version"] = 1
+			self.exp['input_layer'] = self.exp['input_side']*self.exp['input_side'] + 4
 
 		if loadW == True:
 			self.exp["W"] = "W"
@@ -127,22 +132,27 @@ class experiment:
 
 		trainFilepath = "{}{}".format(self.exp['directory'], self.exp['train_file'])
 
-		if self.exp['type'] == "simple":
-			pass # ig.simpleGen()
-		elif self.exp['type'] == "attention":
-			ig.attenGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
-						ifile=self.exp['train_file'])
-		elif self.exp['type'] == "selection":
-			ig.selGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
-						ifile=self.exp['train_file'])
-		elif self.exp['type'] == "combined":
-			ig.combGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
-						self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
-						ifile=self.exp['train_file'])
+		if self.exp['version'] == 1:
+			if self.exp['type'] == "simple":
+				pass # ig.simpleGen()
+			elif self.exp['type'] == "attention":
+				ig.attenGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
+							self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
+							ifile=self.exp['train_file'])
+			elif self.exp['type'] == "selection":
+				ig.selGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
+							self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
+							ifile=self.exp['train_file'])
+			elif self.exp['type'] == "combined":
+				ig.combGen(self.exp['input_side'], self.exp['num_locs'], self.exp['phase_times'],
+							self.exp['phase_var'], self.exp['train_pct'], filepath=self.exp['directory'],
+							ifile=self.exp['train_file'])
+			else:
+				raise Exception("Experiment type not in list: {}".format(self.exp['type']))
+		elif self.exp['version'] == 2:
+			igV2.inputGen(self)
 		else:
-			raise Exception("Experiment type not in list: {}".format(self.exp['type']))
+			raise Exception("Unkown Exp Version")
 
 	def getTrainInputs(self):
 		return util.readTrials(self.exp['directory'] + self.exp['train_file'])

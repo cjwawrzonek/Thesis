@@ -420,7 +420,9 @@ def linearModel(exp, test=False):
 
         trow.append(cos1*cos2)
 
-        trow.append(1)
+        trow.append(sin1*cos1)
+        
+        trow.append(sin2*cos2)
 
         predictors.append(trow)
 
@@ -471,21 +473,22 @@ def linearModel(exp, test=False):
     alpha = .1
     for neuron in range(len(zlayers[0,0])):
     # for t in [1,6,11,17,22]:
-        neuron = 3
+        
         ########################################################################
         # ALTERNATE way of doing Linear Regression from Sussillo et al
         ########################################################################
 
         # just use step t for now
-        t =6
+        t = 6
         rit = zlayers[:,t,neuron]
         F = np.swapaxes(predictors, 0, 1)
 
+        ###### Equ: Bs = inv(F*F.transpose())*F*rit #######
         arg1 = F.dot(F.transpose())
         arg2 = inv(arg1)
         Bs = arg2.dot(F).dot(rit)
-        # Bs = inv(F*F.transpose())*F*rit
-        print Bs
+        
+        # print Bs
         # print Bs[0:2]
         # print Bs[2:4]
         # print Bs[4:6]
@@ -540,9 +543,11 @@ def linearModel(exp, test=False):
         print lassocv.get_params()
         print
         c = np.asarray(lassocv.coef_)
-        for x in range(len(c)):
-            print c[x]
-        # print c[t]
+        # for x in range(len(c)):
+        #     print c[x]
+        print c[1]
+        print c[6]
+        print c[11]
         exit()
         if count > 5:
             exit()
@@ -693,7 +698,7 @@ def tSNE(exp, test=False):
         start = 0
 
     count = start
-    
+
     for step in range(start, len(inputs[0,:,0])):
         plt.subplot(5,5, count)
 
@@ -1134,10 +1139,10 @@ def main():
     # exp.read("exps_set2/attention95/attention95.exp", loadW=True)
     # exp.read("exps_set2/attention256/attention256.exp", loadW=True)
 
-    # exp.read("exps_set2/selection106/selection106.exp", loadW=True)
+    exp.read("exps_set2/selection106/selection106.exp", loadW=True)
     # exp.read("exps_set2/selection256/selection256.exp", loadW=True)
 
-    exp.read("exps_set2/combined86/combined86.exp", loadW=True)
+    # exp.read("exps_set2/combined86/combined86.exp", loadW=True)
     # exp.read("exps_set2/combined246/combined246.exp", loadW=True)
 
     # ret = exp.getTrainInputs()
