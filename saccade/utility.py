@@ -250,8 +250,31 @@ def isTrue(string):
     else:
         return False
 
+def mean2(x):
+    y = np.sum(x) / np.size(x);
+    return y
+
+def corr2(a,b):
+    a = a - mean2(a)
+    b = b - mean2(b)
+
+    r = (a*b).sum() / math.sqrt((a*a).sum() * (b*b).sum())
+    return r
+
+def corr2_coeff(A,B):
+    # Rowwise mean of input arrays & subtract from input arrays themeselves
+    A_mA = A - A.mean(1)[:,None]
+    B_mB = B - B.mean(1)[:,None]
+
+    # Sum of squares across rows
+    ssA = (A_mA**2).sum(1);
+    ssB = (B_mB**2).sum(1);
+
+    # Finally get corr coeff
+    return np.dot(A_mA,B_mB.T)/np.sqrt(np.dot(ssA[:,None],ssB[None]))
+
 def zscore(dataSet):
-    sd = stat.pstdev(dataSet)
+    sd = np.std(dataSet)
     dataMean = np.mean(dataSet)
     zs = []
 
@@ -259,3 +282,12 @@ def zscore(dataSet):
         zs.append((x - dataMean)/sd)
 
     return zs
+
+def main():
+    x = [1, .9, .8, 1]
+    y = [-1, -.9, -.8, -1]
+
+    print corr2(x,y)
+
+if __name__ == "__main__":
+    main()

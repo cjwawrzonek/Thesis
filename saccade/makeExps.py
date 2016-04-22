@@ -2,7 +2,7 @@ import sys
 import os
 import experiment as e
 
-def makeExps(expRoot):
+def makeExpsSimple(expRoot):
 
 	for expType in ['selection', 'attention', 'combined']:
 		expNum = 1
@@ -38,13 +38,20 @@ train_pct		{}'''.format(expType, expType, expType, expNum, expRoot, expType, exp
 						f.close()
 						expNum += 1
 
+def makeExpsDelays(expRoot):
+	raise Exception("Function not yet implemented.")
 
 def main():
-	if len(sys.argv) < 2:
-		raise Exception("Please specify a root directory for your experiments:\n"
-			"Usage: python makeExps [directory]")
+	if len(sys.argv) < 3:
+		raise Exception("Please specify a root directory for your experiments and exp type:\n"
+			"Usage: python makeExps [directory] [type: 1/2]")
 	else:
-		makeExps(sys.argv[1])
+		if sys.argv[2] is "1":
+			makeExpsSimple(sys.argv[1])
+		elif sys.argv[2] is "2":
+			makeExpsDelays(sys.argv[1])
+		else:
+			raise Exception("That exp type is not recognized.")
 
 if __name__ == "__main__":
 	main()

@@ -34,11 +34,6 @@ class HessianRNN(HessianBackprop):
         #Ok, so this line is simply initiating an instance of HessianBackprop with the altered arguments in **kwargs
         super(HessianRNN, self).__init__(**kwargs)
 
-        if self.loadW != False and self.loadW != None:
-            print "Loading previous weights..."
-            ret = util.readW(self.dataPath + self.loadW)
-            self.W = ret["W"]
-
     def forward(self, input, params):
         """Compute activations for given input sequence."""
 
@@ -47,26 +42,24 @@ class HessianRNN(HessianBackprop):
         # note: seq_len and batch_size are swapped; this may be a bit confusing
         # but it makes the indexing a lot nicer in the rest of the code
 
-        # print "\nhere\n" * 3
-
         if len(input.shape) < 3:
             # then we've just been given a single sample (rather than batch)
             input = input[None, :, :]
-
-        # print "here 2"
-        # print input.shape
 
         activations = [np.zeros((input.shape[1],
                                  input.shape[0],
                                  self.layers[i]), dtype=np.float32)
                        for i in [0, 1, 3]]
 
-        # print "here 3"
-        # print activations[0].shape
-
         W_in, b_in = self.get_layer(params, 0)
         W_rec, b_rec = self.get_layer(params, 1)
         W_out, b_out = self.get_layer(params, 2)
+
+        # print b_in
+        # print b_rec
+        # print b_out
+        # print input.shape
+        # exit()
 
         for s in range(input.shape[1]):
             # input activations

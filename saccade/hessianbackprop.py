@@ -48,7 +48,19 @@ class HessianBackprop(object):
         self.targets = None
         self.activations = None
 
-        self.init_weights()
+        if loadW == True:
+            print "Loading previous weights..."
+            # load weights from file
+            ret = util.readW(self.dataPath + "W")
+            self.W = ret["W"]
+            # with open(load_weights, "rb") as f:
+            #     self.W = pickle.loads(f)
+            self.W = np.asarray(self.W)
+            self.W = self.W.astype(np.float32)
+            # print self.W
+            assert np.all([w.dtype == np.float32 for w in self.W])
+        else:
+            self.init_weights()
 
         if use_GPU:
             self.init_GPU()
@@ -361,6 +373,7 @@ class HessianBackprop(object):
 
     def forward(self, input, params):
         """Compute feedforward activations for given input and parameters."""
+        """This isn't the version the rnn uses. See hessianrnn.py/forward()"""
 
         activations = [None for _ in range(self.n_layers)]
         activations[0] = input

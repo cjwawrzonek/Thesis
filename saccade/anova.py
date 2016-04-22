@@ -39,22 +39,18 @@ def onclick(event):
     pause = not pause
 
 # argumetns:
-# wFile - file of weights from training
-# inputFile - file with inputs and targets to test on
-# imageName - name of imageName you wish to name the image, default = "anova.png"
+# expPath - path to experiment file
+# imageFile - name you wish to save the image as, default = "anova.png"
 def anova(expPath, imageFile="anova.png"):
     exp = e.experiment()
-    exp.read(expPath, W=True)
+    exp.read(expPath, loadW=True)
         
     ret = exp.getTrainInputs()
     # ret = exp.getTestInputs()
 
-    ##########################################################
-    # must find way to generalize this value
     numLocations = exp.exp['num_locs']
     global pval
-    pval = 0.01
-    ##########################################################
+    pval = 0.001
 
     inputs = ret['inputs']
     targets = ret['targets']
@@ -64,9 +60,6 @@ def anova(expPath, imageFile="anova.png"):
 
     np.set_printoptions(edgeitems = 10)
 
-    #create an output file for the activations. I don't actually use this yet.
-    # out2 = open("activations", "wb+")
-
     locTrials = [list([]) for _ in range(numLocations)]
     cue1locTrials = [list([]) for _ in range(numLocations)]
     cue2locTrials = [list([]) for _ in range(numLocations)]
@@ -75,7 +68,7 @@ def anova(expPath, imageFile="anova.png"):
     conjPairs = []
     conjTrials = []
 
-    trialMeans = [];
+    trialMeans = []
 
     # The trial mean firing rates for the delay period alone
     trialMeansDelayOnly = []
@@ -127,9 +120,32 @@ def anova(expPath, imageFile="anova.png"):
         conjTrials[conjPairs.index(pair)].append(trial)
 
     count = 0
+    sigNeurons = []
     for neuron in range(len(trialMeans[0])):
-        loc0 = locTrials[0]
-        loc1 = locTrials[1]
+
+        sample1=[]
+        sample2=[]
+
+        for trial in locTrials[0]:
+            sample1.append(trialMeans[trial][neuron])
+        for trial in locTrials[1]:
+            sample2.append(trialMeans[trial][neuron])
+
+        ans = f_oneway(sample1, sample2)
+
+        if ans.pvalue < pval:
+            count += 1
+            sigNeurons.append(neuron)
+            # print ans
+            # print neuron
+    print "# neurons prefer location 0 at cue1 to cue2".format(count, pval)
+    print sigNeurons
+    print
+    exit()
+
+    count = 0
+    sigNeurons = []
+    for neuron in range(len(trialMeans[0])):
 
         sample1=[]
         sample2=[]
@@ -143,9 +159,11 @@ def anova(expPath, imageFile="anova.png"):
 
         if ans.pvalue < pval:
             count += 1
+            sigNeurons.append(neuron)
             # print ans
             # print neuron
-    print "# sig neurons that prefer choice selection (1st or 2nd cue,): {}, pval < {}".format(count, pval)
+    print "# neurons prefer choice selection (1st or 2nd cue,): {}, pval < {}".format(count, pval)
+    print sigNeurons
     print
 
     # number of significant neurons prefering that direction
@@ -188,7 +206,7 @@ def anova(expPath, imageFile="anova.png"):
 
     # trialMeans = trialMeansDelayOnly
 
-    conjugateTest(numLocations, trialMeans, locTrials, conjTrials)
+    # conjugateTest(numLocations, trialMeans, locTrials, conjTrials)
     # cueDiffTest(numLocations, trialMeans, cue1locTrials, cue2locTrials, choices)
     # firingRateGraphs(numLocations, trialMeans, locTrials, sigNeurons, choices)
 
@@ -529,8 +547,9 @@ def plot3dAnova(x, y, z, x_lab, y_lab, z_lab, markerClass=None):
 
 def main():
     # anova("experiments/selection106/selection106.exp")
-    anova("experiments/combined108/combined108.exp")
+    # anova("experiments/combined108/combined108.exp")
     # anova("experiments/attention108/attention108.exp")
+    anova("exps_set2/combined246/combined246.exp")
 
     # did NOT generalize the task
     # anova("experiments/attention58/attention58.exp")

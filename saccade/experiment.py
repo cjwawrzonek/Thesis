@@ -39,7 +39,7 @@ class experiment:
 		self.filepath = None
 		self.W = None
 
-	def read(self, filepath, W=None):
+	def read(self, filepath, loadW=False):
 
 		self.filepath = filepath
 
@@ -62,7 +62,7 @@ class experiment:
 		# First, set a line index for reading in the input
 		i = 0
 
-		print "Reading in experiment"
+		print "Reading in experiment: {}".format(filepath)
 
 		# Now read in the experiment line by line and fill in data
 		while i < len(lines):
@@ -109,15 +109,17 @@ class experiment:
 
 		self.exp['input_layer'] = self.exp['input_side']*self.exp['input_side'] + 4
 
-		if W == True:
-			self.W = "W"
+		if loadW == True:
+			self.exp["W"] = "W"
 		else:
-			self.W = W
+			self.exp["W"] = None
 
 		self.rnn = HessianRNN(layers=[self.exp['input_layer'], self.exp['hidden_layer'], self.exp['out_layer']], struc_damping=0.5,
-					 use_GPU=False, debug=False, loadW=self.W, dataPath=self.exp['directory'])
+					 use_GPU=False, debug=False, loadW=loadW, dataPath=self.exp['directory'])
 
 		np.set_printoptions(edgeitems = 10)
+
+		self.exp['epath'] = self.exp['directory'] + self.exp['name'] + '.exp'
 
 		self.initialized = True
 
@@ -149,8 +151,11 @@ class experiment:
 		return util.readTrials(self.exp['directory'] + "Unused_Locs.train")
 
 	def train(self, loadW=False):
-		if loadW == True:
-			loadW = "{}W".format(self.exp['directory'])
+		if loadW is True:
+			if self.exp['W'] is None:
+				loadW = "{}W".format(self.exp['directory'])
+			else:
+				loadW = "{}{}".format(self.exp['directory'], self.exp['W'])
 
 		if self.exp['directory'] == None or self.exp['directory'] == '':
 			trainFilepath = self.exp['train_file']

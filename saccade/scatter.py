@@ -140,24 +140,8 @@ def scatter(expPath, imageFile=None):
 
 def main():
     # scatter(sys.argv[1])
-    scatter("experiments/selection106/selection106.exp")
-    # random delay training without progressive training
-    # scatter("trial_11x11_rand_trial", "W", "TESTInputs_11x11_12_targetsRAND_long.txt")
-
-    # random delay training with progressive training
-    # scatter("trial_11x11_rand_seq", "W", "TESTInputs_11x11_12_targetsRAND_long.txt")
-
-    # longer periods over trial, random training, no progression
-    # scatter("trial_11x11_12_targetsRAND_long", "W", "TESTInputs_11x11_12_targetsRAND_long.txt")
-
-    # attention task, no random delays
-    # scatter("select_11x11_8_targsNoRand", "W", "TESTSelection_11x11_8_targetsNoRAND.txt")
-
-    # attention task, trained much more thoroughly
-    # scatter("select_11x11_8_targets_shuffle_long", "W", "TESTSelection_11x11_8_targetsNoRAND.txt")
-
-    # attention taslk, trained on 5 of 7 matches as foils
-    # scatter("attention_11x11_8_targets_shuffle", "W_Full", "TESTattention_11x11_8_targets_shuffle.txt")
+    # scatter("experiments/selection106/selection106.exp")
+    scatter("exps_set2/combined246/combined246.exp")
 
 if __name__ == "__main__":
     main()
