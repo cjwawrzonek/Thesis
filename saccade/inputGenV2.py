@@ -5,27 +5,27 @@
 
 import ast
 import sys
-import inputSpaces as ips
 import random
+import math
+
 import utility as util # my standard library
 import pprint as pp
+import numpy as np
 
-def createTargets(n, locations):
-	space = []
-	for i in range(len(locations)):
+def createTargets(locations):
+	spaces = []
+	for i in range(locations):
 		space_i = np.zeros(locations)
 		space_i[i] = 1
-		space.append(space_i)
+		spaces.append(space_i)
 
 	targets = []
 
-	center = int(round(n / 2))
-
 	#now we have to generate the targets
 	for i in range(locations):
-		coor = space.getCoor(i)
-		dx = (coor[1] - center) / center
-		dy = (coor[0] - center) / center
+		rads = (float(i) / float(locations)) * 2 * math.pi
+		dx = math.cos(rads)
+		dy = math.sin(rads)
 
 		# store the deviation from the center in our two x coor variables
 		if dx >= 0:
@@ -36,11 +36,11 @@ def createTargets(n, locations):
 			dxMinus = abs(dx)
 
 		if dy >= 0:
-			dyPlus = 0
-			dyMinus = dy
-		else:
-			dyPlus = abs(dy)
+			dyPlus = dy
 			dyMinus = 0
+		else:
+			dyPlus = 0
+			dyMinus = abs(dy)
 
 		targets.append([dxPlus, dxMinus, dyPlus, dyMinus])
 		# print targets[-1]
@@ -79,7 +79,7 @@ def inputGen(exp, test=False, shuffle=True):
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	targets, spaces = createTargets(n, locations)
+	targets, spaces = createTargets(locations)
 
 	# Create the output file name string
 	if filepath is None:
@@ -161,7 +161,7 @@ def inputGen(exp, test=False, shuffle=True):
 							 			'cue1': stim_time,
 							 			'cue2': stim_time,
 							 			'pause1': pause1,
-							 			'puase2': puase2,
+							 			'pause2': pause2,
 							 			'delay': delay_time,
 							 			'output': out_len}}
 					if (selection == 0):
@@ -364,6 +364,8 @@ def inputGen(exp, test=False, shuffle=True):
 						inputLine.append(0)
 						input_i.append(inputLine)
 
+					trialSet['inputs'] = input_i
+					inputSet.append(trialSet)
 
 					################################################################
 					# Now create the targets
@@ -378,7 +380,7 @@ def inputGen(exp, test=False, shuffle=True):
 							 			'cue1': stim_time,
 							 			'cue2': stim_time,
 							 			'pause1': pause1,
-							 			'puase2': puase2,
+							 			'pause2': pause2,
 							 			'delay': delay_time,
 							 			'output': out_len}}
 					if (selection == 0):
@@ -396,7 +398,7 @@ def inputGen(exp, test=False, shuffle=True):
 					# phase 1 -> 6: stim1 + stim2 + selection + pause1 + pause2
 					################################################################
 					latent_time = selection_time + (2*stim_time) + \
-								  pause1 + puase2 + delay_time
+								  pause1 + pause2 + delay_time
 					for j in range(latent_time):
 						outputLine = []
 						outputLine.append(0)
@@ -436,7 +438,7 @@ def inputGen(exp, test=False, shuffle=True):
 					inputVector = spaces[i]
 
 					falseCue = loc
-					falseInputGrid = space.getInputGrid(falseCue)
+					falseInputVector = spaces[falseCue]
 
 					# Crete the label for this trial with all the necessary information
 					title = {'type':'input', 'task':task, 'inputs':{},
@@ -444,7 +446,7 @@ def inputGen(exp, test=False, shuffle=True):
 							 			'cue1': stim_time,
 							 			'cue2': stim_time,
 							 			'pause1': pause1,
-							 			'puase2': puase2,
+							 			'pause2': pause2,
 							 			'delay': delay_time,
 							 			'output': out_len}}
 					if (selection == 0):
@@ -647,6 +649,8 @@ def inputGen(exp, test=False, shuffle=True):
 						inputLine.append(0)
 						input_i.append(inputLine)
 
+					trialSet['inputs'] = input_i
+					unusedInSet.append(trialSet)
 
 					################################################################
 					# Now create the targets
@@ -661,7 +665,7 @@ def inputGen(exp, test=False, shuffle=True):
 							 			'cue1': stim_time,
 							 			'cue2': stim_time,
 							 			'pause1': pause1,
-							 			'puase2': puase2,
+							 			'pause2': pause2,
 							 			'delay': delay_time,
 							 			'output': out_len}}
 					if (selection == 0):
@@ -679,7 +683,7 @@ def inputGen(exp, test=False, shuffle=True):
 					# phase 1 -> 6: stim1 + stim2 + selection + pause1 + pause2
 					################################################################
 					latent_time = selection_time + (2*stim_time) + \
-								  pause1 + puase2 + delay_time
+								  pause1 + pause2 + delay_time
 					for j in range(latent_time):
 						outputLine = []
 						outputLine.append(0)
@@ -714,7 +718,7 @@ def inputGen(exp, test=False, shuffle=True):
 
 
 def main():
-	
+
 	raise Exception("Error: This main method is deprecated for now.")
 
 if __name__ == "__main__":

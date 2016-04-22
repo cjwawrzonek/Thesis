@@ -1,0 +1,15 @@
+## selection Experiment
+description		selection experiment
+version			2
+name			selection98
+directory		exps_set3/selection98
+type			selection
+phase_times		{"delay":5,"output":3,"cue":3,"locs":3,"pause1":3,"pause2":3}
+num_locs		32
+hidden_layer	25
+out_layer		4
+init_weights	init_weights
+train_shuffle	true
+loc_connect		false
+phase_var		{"delay":false,"cue":false,"locs":false}
+train_pct		92

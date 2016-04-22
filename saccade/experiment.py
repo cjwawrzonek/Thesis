@@ -108,7 +108,7 @@ class experiment:
 		if not 'train_file' in self.exp:
 			self.exp['train_file'] = "{}.train".format(self.exp['name'])
 
-		if not "version" in self.exp:
+		if "version" in self.exp:
 			self.exp['input_layer'] = self.exp["num_locs"] + 4
 		else:
 			self.exp["version"] = 1

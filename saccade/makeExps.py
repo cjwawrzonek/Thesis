@@ -7,8 +7,8 @@ def makeExpsSimple(expRoot):
 	for expType in ['selection', 'attention', 'combined']:
 		expNum = 1
 		for locs in [8, 16, 24, 32]:
-			for pct in [80, 85, 90, 92]:
-				for layer in [16, 25, 36]:
+			for pct in [80, 85, 87, 90, 92]:
+				for layer in [9, 16, 25, 36, 49]:
 					if not os.path.exists("{}".format(expRoot)):
 						os.makedirs("{}".format(expRoot))
 					if not os.path.exists("{}/{}{}".format(expRoot, expType, expNum)):
@@ -22,7 +22,6 @@ version			2
 name			{}{}
 directory		{}/{}{}
 type			{}
-total_length	18
 phase_times		{{"delay":5,"output":3,"cue":3,"locs":3,"pause1":3,"pause2":3}}
 num_locs		{}
 hidden_layer	{}
@@ -31,13 +30,12 @@ init_weights	init_weights
 train_shuffle	true
 loc_connect		false
 phase_var		{{"delay":false,"cue":false,"locs":false}}
-variance		2
 train_pct		{}'''.format(expType, expType, expType, expNum, expRoot, expType, expNum,
 							 expType, locs, layer, pct))
-						f.close()
-						expNum += 1
+					f.close()
+					expNum += 1
 
-def makeExpsDelays(expRoot):
+def makeExpsVariable(expRoot):
 	raise Exception("Function not yet implemented.")
 
 def main():
@@ -48,7 +46,7 @@ def main():
 		if sys.argv[2] is "1":
 			makeExpsSimple(sys.argv[1])
 		elif sys.argv[2] is "2":
-			makeExpsDelays(sys.argv[1])
+			makeExpsVariable(sys.argv[1])
 		else:
 			raise Exception("That exp type is not recognized.")
 
