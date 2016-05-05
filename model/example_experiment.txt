@@ -1,0 +1,18 @@
+# Experiment Description Short Description
+
+name			String
+description		String
+directory		String, directory where experiment is stored
+type 			simple/selection/attention/combined
+total_length	number of timesteps
+phase_times		dictionary of total time steps
+num_locs		1->24?
+init_weights	filename
+input_side		int
+hidden_layer	int
+out_layer		int
+train_shuffle	true/false
+loc_connect		true/false
+phase_var		dictionary of phases with true or false
+variance		int, variance of period times +/-
+train_pct		a percentage between (0,100), determines how comprehensive the training is

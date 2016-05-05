@@ -1,0 +1,3 @@
+[['attention100: pct=92, locs=32, layer=49', 5.9053197438860764e-05],
+ ['combined100: pct=92, locs=32, layer=49', 0.00058719156117274839],
+ ['selection100: pct=92, locs=32, layer=49', 0.007183243488443309]]

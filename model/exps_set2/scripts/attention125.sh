@@ -1,0 +1,10 @@
+#!/bin/bash
+# ------------------------------------------------------------------
+# [CJ Wawrzonek] Title
+#          Script to submit experiment
+# ------------------------------------------------------------------
+cd ../..
+FPATH="exps_set2/attention125/attention125.exp"
+if [ -f $FPATH ]; then
+	python experiment.py attention125 exps_set2/attention125
+fi
