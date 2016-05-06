@@ -88,6 +88,11 @@ class experiment:
 		# get the dictionary of delay times
 		self.exp['phase_var'] = json.loads(self.exp['phase_var'])
 
+		if "gauss_inputs" in self.exp:
+			self.exp['gauss_inputs'] = util.isTrue(self.exp['gauss_inputs'])
+		else:
+			self.exp['gauss_inputs'] = False
+
 		for phase in self.exp['phase_times']:
 			self.exp['phase_times'][phase] = int(self.exp['phase_times'][phase])
 
@@ -150,6 +155,12 @@ class experiment:
 			else:
 				raise Exception("Experiment type not in list: {}".format(self.exp['type']))
 		elif self.exp['version'] == 2:
+			igV2.inputGen(self)
+		elif self.exp['version'] == 3:
+			igV2.inputGen(self)
+		elif self.exp['version'] == 4:
+			igV2.inputGen(self)
+		elif self.exp['version'] == 5:
 			igV2.inputGen(self)
 		else:
 			raise Exception("Unkown Exp Version")

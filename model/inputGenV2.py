@@ -12,11 +12,17 @@ import utility as util # my standard library
 import pprint as pp
 import numpy as np
 
-def createTargets(locations):
+def createTargets(locations, gaussian=False):
 	spaces = []
 	for i in range(locations):
 		space_i = np.zeros(locations)
 		space_i[i] = 1
+		if locations >= 4:
+			if gaussian:
+				for j in range(1,3):
+					gauss = util.gaussian(j,0,1)
+					space_i[(i+j) % locations] = gauss
+					space_i[(i-j) % locations] = gauss
 		spaces.append(space_i)
 
 	targets = []
@@ -79,7 +85,10 @@ def inputGen(exp, test=False, shuffle=True):
 	#*
 	reps = int(round((locations - 1) * (float(train_pct) / 100)))
 
-	targets, spaces = createTargets(locations)
+	if exp.exp['gauss_inputs']:
+		targets, spaces = createTargets(locations, gaussian=True)
+	else:
+		targets, spaces = createTargets(locations)
 
 	# Create the output file name string
 	if filepath is None:

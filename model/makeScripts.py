@@ -98,7 +98,7 @@ echo ""'''
 def main():
 	if len(sys.argv) < 2:
 		raise Exception("Please specify a root directory to find your experiments:\n"
-			"Usage: python makeScripts [exps directory]")
+			"Usage: python makeScripts [directory]")
 	else:
 		makeScripts(sys.argv[1])
 

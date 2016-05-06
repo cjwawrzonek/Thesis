@@ -2,7 +2,7 @@ import sys
 import os
 import experiment as e
 
-def makeExpsSimple(expRoot):
+def makeExps(expRoot):
 
 	for expType in ['selection', 'attention', 'combined']:
 		expNum = 1
@@ -18,11 +18,14 @@ def makeExpsSimple(expRoot):
 
 					f.write('''## {} Experiment
 description		{} experiment
-version			2
+version			3
 name			{}{}
 directory		{}/{}{}
 type			{}
 phase_times		{{"delay":5,"output":3,"cue":3,"locs":3,"pause1":3,"pause2":3}}
+att_order		["cue","pause1","locs","pause2","locs","delay","output"]
+sel_order		["locs","pause1","locs","pause2","cue","delay","output"]
+gauss_inputs	True
 num_locs		{}
 hidden_layer	{}
 out_layer		4
@@ -39,16 +42,11 @@ def makeExpsVariable(expRoot):
 	raise Exception("Function not yet implemented.")
 
 def main():
-	if len(sys.argv) < 3:
-		raise Exception("Please specify a root directory for your experiments and exp type:\n"
-			"Usage: python makeExps [directory] [type: 1/2]")
+	if len(sys.argv) < 2:
+		raise Exception("Please specify a root directory for your experiments:\n"
+			"Usage: python makeExps [directory]")
 	else:
-		if sys.argv[2] is "1":
-			makeExpsSimple(sys.argv[1])
-		elif sys.argv[2] is "2":
-			makeExpsVariable(sys.argv[1])
-		else:
-			raise Exception("That exp type is not recognized.")
+		makeExps(sys.argv[1])
 
 if __name__ == "__main__":
 	main()
