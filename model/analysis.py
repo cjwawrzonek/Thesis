@@ -303,6 +303,185 @@ def pcaProjection(exp, numComponents=3, trials=None,
         
     plt.show(block=True)
 
+def plotPCproj(exp, test=False, d3=False):
+    rnn = exp.rnn
+
+    if test:
+        ret = exp.getTestInputs()
+    else:
+        ret = exp.getTrainInputs()
+
+    numLocs = exp.exp['num_locs']
+
+    inputs = ret['inputs']
+    targets = ret['targets']
+    inames = ret['inputNames']
+
+    info0 = ast.literal_eval(inames[0])
+    cue1 = info0['inputs']['cue1']
+    cue2 = info0['inputs']['cue2']
+
+    if exp.exp['type'] == "selection":
+        pc1 = getPCA(exp, steps=[1,2])
+        pc2 = getPCA(exp, steps=[7,8])
+        pc3 = getPCA(exp, steps=[13,14])
+        # pc3 = getPCA(exp, steps=[21, 22])
+    elif exp.exp['type'] == "attention":
+        pc1 = getPCA(exp, steps=[7,8])
+        pc2 = getPCA(exp, steps=[13,14])
+        pc3 = getPCA(exp, steps=[1,2])
+        # pc3 = getPCA(exp, steps=[21,22])
+    else:
+        raise Exception("Can only do this for attention/selection task right now.")
+
+
+    # pc1 = getPCA(exp, steps=[20, 21, 22])
+    # pc2 = getPCA(exp, steps=[6,7,8])
+
+    # pc1 = getPCA(exp, steps=[19, 20], trials=trials1)
+    # pc2 = getPCA(exp, steps=[19, 20], trials=trials2)
+
+    # print pc1.explained_variance_ratio_
+    # print pc2.explained_variance_ratio_
+    # exit()
+
+    # 1, 20, 23, 149, for selection92
+    # 20 is super nice for selection 92
+
+    # for step 1 and 2
+    ci = 0
+    cs = ['r', 'g', 'b', 'crimson', 'k', 'k', 'k']
+    c = cs[ci]
+
+    # trials = range(5)
+    # trials = [100,24,25]
+    trials = [0,1,2,3,4,5,6]
+    # trials = [20]
+
+    fig = plt.figure()
+    if d3:
+        ax = fig.add_subplot(111, projection='3d')
+        ax = Axes3D(fig)
+    else:
+        ax = fig.add_subplot(111)
+
+    for t in trials: 
+
+        info = ast.literal_eval(inames[t])
+
+        j = np.asarray(inputs[t])
+        j_copy = copy.copy(j)
+
+        # Switch the selection parameter
+
+        j_copy[12][-2] = j[12][-1]
+        j_copy[13][-2] = j[13][-1]
+        j_copy[14][-2] = j[14][-1]
+        j_copy[12][-1] = j[12][-2]
+        j_copy[13][-1] = j[13][-2]
+        j_copy[14][-1] = j[14][-2]
+        # j_copy[12][-2:] = [1, 0]
+        # j_copy[13][-2:] = [1, 0]
+        # j_copy[14][-2:] = [1, 0]
+
+
+        hidden = rnn.forward(j, rnn.W)[1]
+        hidden = hidden[:,0,:]
+
+        hiddenswitch = rnn.forward(j_copy, rnn.W)[1]
+        hiddenswitch = hiddenswitch[:,0,:]
+
+        # steps = [9,10,11]
+        # part = "Sample 2"
+
+        # steps = [17, 18, 19]
+        # part = "Delay"
+
+        # steps = [12,13,14]
+        # part = "Selection"
+
+        # steps = range(23)
+        # part = "All"
+
+        steps = range(20)
+        part = "All but Output"
+
+        # steps = [20,21,22]
+        # part = "Output"
+
+        # steps = [0,1,2]
+        # part = "Sample 1"
+
+        # steps = [2, 18]
+        # part = "Sample 1 and Delay"
+
+        hids = [hidden, hiddenswitch]
+        js = [j, j_copy]
+
+        for a in range(2):
+
+            coors = []
+
+            for step in steps:
+
+                hid = hids[a][step]
+                in_ = js[a][step]
+
+                # hid=hidden[step]
+                # in_ = j[step]
+
+                # in_[0:numLocs] = [0 for i in range(numLocs)]
+                # in_[-2:] = [0 for i in range(2)]
+
+                hidp1 = pc1.transform(hid.reshape(1,-1))[0,0]
+                hidp2 = pc2.transform(hid.reshape(1,-1))[0,0]
+                hidp3 = pc3.transform(hid.reshape(1,-1))[0,0]
+
+
+                if d3:
+                    coori = [hidp1, hidp2, hidp3]
+                else:
+                    coori = [hidp1, hidp2]
+
+                coors.append(coori)
+
+            coors = np.asarray(coors)
+            if d3:
+                ax.scatter(coors[0][0], coors[0][1], coors[0][2], color=c, marker='s', s=30)
+                ax.plot(coors[:, 0], coors[:, 1], coors[:, 2], color=c, ls="--")
+                ax.scatter(coors[-1][0], coors[-1][1], coors[-1][2], color=c, marker='*',s=30)
+            else:
+                ax.scatter(coors[0,0], coor1[0,1], color=c, marker='s', s=30)
+                ax.plot(coors[:, 0], coors[:, 1], color=c, ls="--")
+                ax.scatter(coors[-1][0], coors[-1][1], color=c, marker='*',s=30)
+
+            ci += 1
+            c = cs[ci % len(cs)]
+
+        tit = '''RNN Relaxation along Task PC's:
+    {} Task, {}, Trial #{}'''.format(exp.exp['type'].capitalize(), part, t)
+        plt.title(tit)
+        ax.set_xlabel('PC Sample 1')
+        ax.set_ylabel('PC Sample 2')
+        if d3:
+            ax.set_zlabel('PC Selection Cue')
+        plt.axis([-1.2, 1.2, -1.2, 1.2])
+
+        plt.show(block=True)
+        plt.clf()
+        plt.close()
+        # plt.cla()
+        # fig.clf()
+
+        fig = plt.figure()
+        if d3:
+            ax = fig.add_subplot(111, projection='3d')
+            ax = Axes3D(fig)
+        else:
+            ax = fig.add_subplot(111)
+
+    exit()
+
 def FRplot(exp, trials=None, neurons=None, test=False):
     if test:
         ret = exp.getTestInputs()
@@ -1812,25 +1991,31 @@ def plotPCdrift(exp, test=False, d3=False):
     # 1, 20, 23, 149, for selection92
     # 20 is super nice for selection 92
 
+    # for step 1 and 2
+    ci = 0
+    cs = ['r', 'g', 'b', 'crimson', 'k', 'k', 'k']
+    c = cs[ci]
+
     # trials = range(5)
-    trials = [100,24,25]
+    # trials = [100,24,25]
+    trials = [0,1,2,3,4,5,6]
     # trials = [20]
 
-    # fig = plt.figure()
-    # if d3:
-    #     ax = fig.add_subplot(111, projection='3d')
-    #     ax = Axes3D(fig)
-    # else:
-    #     ax = fig.add_subplot(111)
+    fig = plt.figure()
+    if d3:
+        ax = fig.add_subplot(111, projection='3d')
+        ax = Axes3D(fig)
+    else:
+        ax = fig.add_subplot(111)
 
     for t in trials: 
 
-        fig = plt.figure()
-        if d3:
-            ax = fig.add_subplot(111, projection='3d')
-            ax = Axes3D(fig)
-        else:
-            ax = fig.add_subplot(111)
+        # fig = plt.figure()
+        # if d3:
+        #     ax = fig.add_subplot(111, projection='3d')
+        #     ax = Axes3D(fig)
+        # else:
+        #     ax = fig.add_subplot(111)
 
         info = ast.literal_eval(inames[t])
 
@@ -1856,11 +2041,6 @@ def plotPCdrift(exp, test=False, d3=False):
         hiddenswitch = rnn.forward(j_copy, rnn.W)[1]
         hiddenswitch = hiddenswitch[:,0,:]
 
-        # for step 1 and 2
-        ci = 0
-        cs = ['r', 'g', 'b', 'crimson', 'k', 'k', 'k']
-        c = cs[ci]
-
         # steps = [9,10,11]
         # part = "Sample 2"
 
@@ -1870,19 +2050,22 @@ def plotPCdrift(exp, test=False, d3=False):
         # steps = [12,13,14]
         # part = "Selection"
 
-        # steps = [12,13,14]
-        # part = "Output"
+        # steps = range(23)
+        # part = "All"
 
         # steps = [20,21,22]
-        # steps = range(23)
+        # part = "Output"
 
         # steps = [0,1,2]
         # part = "Sample 1"
 
+        # steps = [2, 18]
+        # part = "Sample 1 and Delay"
+
         hids = [hidden, hiddenswitch]
         js = [j, j_copy]
 
-        for a in range(2):
+        for a in range(1):
             for step in steps:
 
                 hid = hids[a][step]
@@ -1892,7 +2075,7 @@ def plotPCdrift(exp, test=False, d3=False):
                 # in_ = j[step]
 
                 # in_[0:numLocs] = [0 for i in range(numLocs)]
-                in_[-2:] = [0 for i in range(2)]
+                # in_[-2:] = [0 for i in range(2)]
 
                 hidp1 = pc1.transform(hid.reshape(1,-1))[0,0]
                 hidp2 = pc2.transform(hid.reshape(1,-1))[0,0]
@@ -1927,8 +2110,8 @@ def plotPCdrift(exp, test=False, d3=False):
                     ax.plot(coors2[:, 0], coors2[:, 1], color=c, ls="--")
                     ax.scatter(coors2[-1][0], coors2[-1][1], color=c, marker='*',s=30)
 
-                ci += 1
-                c = cs[ci % len(cs)]
+                # ci += 1
+                # c = cs[ci % len(cs)]
 
                 # # Now drift again with an answer presentation
                 # finalrec = recseq[-1]
@@ -1969,18 +2152,20 @@ def plotPCdrift(exp, test=False, d3=False):
                 # ci += 1
                 # c = cs[ci % len(cs)]
 
-        tit = '''RNN Relaxation along Task PC's:
-    {} Task, {}, Trial #{}'''.format(exp.exp['type'].capitalize(), part, t)
-        plt.title(tit)
-        ax.set_xlabel('PC Sample 1')
-        ax.set_ylabel('PC Sample 2')
-        if d3:
-            ax.set_zlabel('PC Selection Cue')
-        plt.axis([-1.2, 1.2, -1.2, 1.2])
-        plt.show(block=True)
-        plt.clf()
+            ci += 1
+            c = cs[ci % len(cs)]
 
-    exit()
+    tit = '''RNN Relaxation along Task PC's:
+{} Task, {}, Trial #{}'''.format(exp.exp['type'].capitalize(), part, t)
+    plt.title(tit)
+    ax.set_xlabel('PC Sample 1')
+    ax.set_ylabel('PC Sample 2')
+    if d3:
+        ax.set_zlabel('PC Selection Cue')
+    plt.axis([-1.2, 1.2, -1.2, 1.2])
+
+    plt.show(block=True)
+    plt.clf()
         
 
 def plotSlowPoints(exp, v=1, test=False):
@@ -2119,7 +2304,7 @@ def main():
 
     ################# exps_set2: generalized #######################
     # exp.read("exps_set2/attention95/attention95.exp", loadW=True)
-    exp.read("exps_set2/attention256/attention256.exp", loadW=True)
+    # exp.read("exps_set2/attention256/attention256.exp", loadW=True)
 
     # exp.read("exps_set2/selection106/selection106.exp", loadW=True)
     # exp.read("exps_set2/selection256/selection256.exp", loadW=True)
@@ -2141,7 +2326,7 @@ def main():
     ### selection
     # exp.read("exps_set3/selection93/selection93.exp", loadW=True)
 
-    # exp.read("exps_set3/selection89/selection89.exp", loadW=True)
+    exp.read("exps_set3/selection89/selection89.exp", loadW=True)
     # exp.read("exps_set3/selection99/selection99.exp", loadW=True)
 
 
@@ -2173,7 +2358,7 @@ def main():
 
 
 
-    corrs = RSA(exp)
+    # corrs = RSA(exp)
     # print corrs
 
 
@@ -2212,7 +2397,11 @@ def main():
 
 
     # plotPCdrift(exp)
-    # plotPCdrift(exp, d3=True)
+    plotPCdrift(exp, d3=True)
+
+
+
+    plotPCproj(exp, d3=True)
 
 
 

@@ -25,7 +25,8 @@ type			{}
 phase_times		{{"delay":5,"output":3,"cue":3,"locs":3,"pause1":3,"pause2":3}}
 att_order		["cue","pause1","locs","pause2","locs","delay","output"]
 sel_order		["locs","pause1","locs","pause2","cue","delay","output"]
-gauss_inputs	True
+gauss_inputs	False
+noise			True
 num_locs		{}
 hidden_layer	{}
 out_layer		4

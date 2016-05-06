@@ -13,8 +13,13 @@ import numpy as np
 from pprint import pprint
 from scipy.special import expit
 
+# # Non-normalized (ie max of 1 at mean)
+# def gaussian(x, mu, sig):
+#     return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
+
+# # Normalied (ie sum over whole distribution = 1)
 def gaussian(x, mu, sig):
-    return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
+    return 1./(math.sqrt(2.*math.pi)*sig)*np.exp(-np.power((x - mu)/sig, 2.)/2)
 
 def question(question, default="yes"):
     valid = {"yes": True, "y": True, "ye": True,

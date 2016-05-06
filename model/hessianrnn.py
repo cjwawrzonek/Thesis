@@ -34,7 +34,7 @@ class HessianRNN(HessianBackprop):
         #Ok, so this line is simply initiating an instance of HessianBackprop with the altered arguments in **kwargs
         super(HessianRNN, self).__init__(**kwargs)
 
-    def drift(self, in_0, rec_0, bias=False, max_iter=200, ret_seq=False,
+    def drift(self, in_0, rec_0, bias=False, max_iter=100, ret_seq=False,
               single_ret=False, tol=0.000001):
         """Let the network drift on a given input until it minimizes the
         speed function, q, or it maxes iterations. bias uses the b_rec
@@ -92,7 +92,7 @@ class HessianRNN(HessianBackprop):
             return rec_t
         return rec_t, rec_1
 
-    def forward(self, input, params):
+    def forward(self, input, params, noise=False):
         """Compute activations for given input sequence."""
 
         # input shape = [batch_size, seq_len, input_dim]
@@ -119,22 +119,50 @@ class HessianRNN(HessianBackprop):
         # print input.shape
         # exit()
 
-        for s in range(input.shape[1]):
-            # input activations
-            activations[0][s] = input[:, s]
-            # TODO: save memory by not storing inputs twice
+        if noise:
+            for s in range(input.shape[1]):
+                # input activations
+                activations[0][s] = input[:, s]
+                # TODO: save memory by not storing inputs twice
 
-            # recurrent activations
-            ff_input = np.dot(activations[0][s], W_in) + b_in
+                # recurrent activations
+                ff_input = np.dot(activations[0][s], W_in) + b_in
 
-            if s > 0:
-                rec_input = np.dot(activations[1][s - 1], W_rec)
-            else:
-                rec_input = b_rec
-            activations[1][s] = expit(ff_input + rec_input)
+                if s > 0:
+                    rec_input = np.dot(activations[1][s - 1], W_rec)
+                else:
+                    rec_input = b_rec
 
-            # output activations
-            activations[2][s] = expit(np.dot(activations[1][s], W_out) + b_out)
+                # activations[1][s] = expit(ff_input + rec_input)
+                activations[1][s] = expit((ff_input + rec_input) + 
+                                    np.random.normal(0,.1,ff_input.shape)*.1)
+
+                # exit()
+                # print (ff_input + rec_input)[0]
+                # print 
+                # print (ff_input + rec_input + np.random.normal(0,.2,len(rec_input))*.2)[0]
+                # exit()
+
+                # output activations
+                activations[2][s] = expit(np.dot(activations[1][s], W_out) + b_out)
+
+        else:
+            for s in range(input.shape[1]):
+                # input activations
+                activations[0][s] = input[:, s]
+                # TODO: save memory by not storing inputs twice
+
+                # recurrent activations
+                ff_input = np.dot(activations[0][s], W_in) + b_in
+
+                if s > 0:
+                    rec_input = np.dot(activations[1][s - 1], W_rec)
+                else:
+                    rec_input = b_rec
+                activations[1][s] = expit(ff_input + rec_input)
+
+                # output activations
+                activations[2][s] = expit(np.dot(activations[1][s], W_out) + b_out)
 
         return activations
 
